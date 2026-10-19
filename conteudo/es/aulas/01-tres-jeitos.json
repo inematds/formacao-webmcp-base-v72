@@ -175,7 +175,7 @@
     {
       "tipo": "video",
       "titulo": "WebMCP en 30 segundos",
-      "sub": "Concepto en 30 s. Dos avisos del 19/10/2026: el \"formulario que se vuelve tool\" es la API declarativa, que quedó fuera de la spec y solo existe en Chrome; y la seguridad no queda solo con el sitio: prompt injection no tiene solución, y el curso 4 trata ese tema.",
+      "sub": "Concepto en 30 s. Dos avisos del 19/10/2026: el \"formulario que se vuelve herramienta\" es la API declarativa, que quedó fuera de la spec y solo existe en Chrome; y la seguridad no queda solo en manos del sitio: prompt injection no está resuelta, y el curso 4 trata ese tema.",
       "chave": "webmcp-short"
     },
     {

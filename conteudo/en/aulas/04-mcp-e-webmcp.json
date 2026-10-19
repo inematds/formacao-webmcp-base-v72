@@ -108,7 +108,7 @@
         {
           "rot": "File · kit/site/deteccao.js",
           "icone": "arquivo",
-          "conteudo": "// deteccao.js — WebMCP feature detection with fallback (course 0 kit, WebMCP Program).\n// Spec used: WebMCP, Community Group Draft Report from 2026-10-16 (document.modelContext).\n// It is a Community Group draft, not a standard: in Chrome only with an origin trial (149–156) or a local flag.\n// Without the API, nothing changes: the form above is still the path for people and agents.\n(function () {\n  const caminho = \"modelContext\" in document\n    ? \"WebMCP presente: aqui a página registraria as ferramentas (curso 2 da formação)\"\n    : \"WebMCP ausente: o site segue pelo formulário, igual para todos\";\n  document.documentElement.dataset.webmcp = \"modelContext\" in document ? \"sim\" : \"nao\";\n  console.log(caminho);\n})();"
+          "conteudo": "// deteccao.js — WebMCP feature detection with fallback (course 0 kit, WebMCP Program).\n// Spec used: WebMCP, Draft Community Group Report from 2026-10-16 (document.modelContext).\n// It is a Community Group draft, not a standard: in Chrome only with an origin trial (149–156) or a local flag.\n// Without the API, nothing changes: the form above is still the path for people and agents.\n(function () {\n  const caminho = \"modelContext\" in document\n    ? \"WebMCP presente: aqui a página registraria as ferramentas (curso 2 da formação)\"\n    : \"WebMCP ausente: o site segue pelo formulário, igual para todos\";\n  document.documentElement.dataset.webmcp = \"modelContext\" in document ? \"sim\" : \"nao\";\n  console.log(caminho);\n})();"
         },
         {
           "rot": "Terminal · the two branches",

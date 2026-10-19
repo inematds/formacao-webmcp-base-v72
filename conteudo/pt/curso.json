@@ -94,7 +94,8 @@
         "itens": [
           "É o curso 0: a base dos outros cinco. Ordem sugerida: 0 → 1 → 2 → 3 → 4 → 5.",
           "Depois dele: 1 · servidor MCP do seu serviço, 2 · WebMCP na página, 3 · agentes de navegador, 4 · segurança, 5 · expert.",
-          "Antes de começar: Node 20 ou mais novo, git e Python 3. Linux ou macOS; no Windows, use o WSL."
+          "Antes de começar: Node 20 ou mais novo, git e Python 3. Linux ou macOS; no Windows, use o WSL.",
+          "O kit, a página de exemplo e as mensagens dos scripts estão em português em todas as versões do curso; os comandos são os mesmos."
         ]
       }
     ]

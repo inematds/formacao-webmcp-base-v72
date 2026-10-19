@@ -132,7 +132,7 @@
           },
           {
             "rot": "Common mistake: copying the date from a post",
-            "html": "<p>Old posts and courses cite the 09/17/2026 draft and still show <code>navigator.modelContext</code>. The date that counts is the one in the spec header on the day you read it. If estado.sh shows a date other than 10/16/2026, the spec changed after this course was written: reread it before using any example from here.</p>"
+            "html": "<p>Material from before May 2026 still shows <code>navigator.modelContext</code>, and September courses cite the 09/17/2026 draft. The date that counts is the one in the spec header on the day you read it. If the estado.sh shows a date other than 10/16/2026, the spec changed after this course: reread it before using any example from here.</p>"
           }
         ]
       }

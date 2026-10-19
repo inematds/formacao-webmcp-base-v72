@@ -94,7 +94,8 @@
         "itens": [
           "This is course 0: the foundation for the other five. Suggested order: 0 → 1 → 2 → 3 → 4 → 5.",
           "After it: 1 · MCP server for your service, 2 · WebMCP on the page, 3 · browser agents, 4 · security, 5 · expert.",
-          "Before you start: Node 20 or newer, git, and Python 3. Linux or macOS; on Windows, use WSL."
+          "Before you start: Node 20 or newer, git, and Python 3. Linux or macOS; on Windows, use WSL.",
+          "The kit, the sample page, and the script messages are in Portuguese in all versions of the course; the commands are the same."
         ]
       }
     ]

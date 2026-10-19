@@ -132,7 +132,7 @@
           },
           {
             "rot": "Erro comum: copiar a data de um post",
-            "html": "<p>Posts e cursos antigos citam o rascunho de 17/09/2026 e ainda mostram <code>navigator.modelContext</code>. A data que vale é a do cabeçalho da spec no dia em que você lê. Se o estado.sh mostrar uma data diferente de 16/10/2026, a spec mudou depois deste curso: releia antes de usar qualquer exemplo daqui.</p>"
+            "html": "<p>Material anterior a maio/2026 ainda mostra <code>navigator.modelContext</code>, e cursos de setembro citam o rascunho de 17/09/2026. A data que vale é a do cabeçalho da spec no dia em que você lê. Se o estado.sh mostrar uma data diferente de 16/10/2026, a spec mudou depois deste curso: releia antes de usar qualquer exemplo daqui.</p>"
           }
         ]
       }

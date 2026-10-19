@@ -132,7 +132,7 @@
           },
           {
             "rot": "Error común: copiar la fecha de un post",
-            "html": "<p>Los posts y cursos antiguos citan el borrador del 17/09/2026 y todavía muestran <code>navigator.modelContext</code>. La fecha que vale es la del encabezado de la spec el día en que lees. Si el estado.sh muestra una fecha distinta del 16/10/2026, la spec cambió después de este curso: vuelve a leerla antes de usar cualquier ejemplo de aquí.</p>"
+            "html": "<p>El material anterior a mayo/2026 todavía muestra <code>navigator.modelContext</code>, y los cursos de septiembre citan el borrador del 17/09/2026. La fecha que vale es la del encabezado de la spec el día en que tú lees. Si estado.sh muestra una fecha distinta del 16/10/2026, la spec cambió después de este curso: vuelve a leerla antes de usar cualquier ejemplo de aquí.</p>"
           }
         ]
       }

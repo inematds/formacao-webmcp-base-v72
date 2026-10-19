@@ -175,7 +175,7 @@
     {
       "tipo": "video",
       "titulo": "WebMCP in 30 seconds",
-      "sub": "The concept in 30 s. Two notes from 10/19/2026: the \"form that becomes a tool\" is the declarative API, which was left out of the spec and only exists in Chrome; and security doesn't rest on the site alone: prompt injection has no solution, and course 4 covers it.",
+      "sub": "The concept in 30 s. Two notes from 10/19/2026: the \"form that becomes a tool\" is the declarative API, which was left out of the spec and only exists in Chrome; and security isn't up to the site alone: prompt injection is not solved, and course 4 covers it.",
       "chave": "webmcp-short"
     },
     {
