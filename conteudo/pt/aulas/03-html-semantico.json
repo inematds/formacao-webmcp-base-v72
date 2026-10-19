@@ -1,0 +1,261 @@
+{
+  "slug": "html-semantico",
+  "num": 3,
+  "menu": "HTML",
+  "titulo": "HTML semântico e formulário bem rotulado: a interface que todo agente já lê",
+  "titulo_curto": "HTML que o agente lê",
+  "minutos": 20,
+  "lead": "Antes de qualquer ferramenta para agentes, existe uma interface que todos eles já leem: o HTML. Rótulo ligado ao campo, botão de verdade, região principal, título, idioma e texto alternativo. É estável, serve para leitor de tela e para agente, e não depende de navegador experimental. Nesta aula você conserta a página de exemplo até zerar a conferência.",
+  "objetivo": "corrigir rótulos, botão, regiões e alt até o arvore.mjs não achar nenhum problema na sua cópia da página.",
+  "competencias": [
+    "rotular-formulario",
+    "usar-elementos-nativos",
+    "zerar-a-conferencia"
+  ],
+  "aprende": [
+    {
+      "icone": "caneta",
+      "t": "Seis consertos que o agente sente na hora"
+    },
+    {
+      "icone": "check",
+      "t": "Elemento nativo antes de ARIA"
+    },
+    {
+      "icone": "terminal",
+      "t": "Conferir com o arvore.mjs até zero"
+    },
+    {
+      "icone": "alvo",
+      "t": "Levar o mesmo conserto para o seu site"
+    }
+  ],
+  "hero_alt": "Parede de ferramentas de uma oficina de bicicletas, cada ferramenta no seu contorno com uma etiqueta em branco, e um monitor no canto.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "Seis consertos, da página antiga à nova",
+      "sub": "Clique em cada um. Todos aparecem na conferência do arvore.mjs.",
+      "estilo": "escada",
+      "nos": [
+        {
+          "icone": "caneta",
+          "titulo": "Rótulo",
+          "sub": "label for",
+          "detalhe": "Cada campo ganha um <label for=\"id\">. O nome vira o texto do rótulo, que não some quando a pessoa digita. Placeholder fica como dica, nunca como nome."
+        },
+        {
+          "icone": "check",
+          "titulo": "Botão",
+          "sub": "button",
+          "detalhe": "Ação é <button type=\"submit\"> dentro de um <form>. Funciona com teclado, aparece como button na árvore e envia o formulário sem JavaScript extra."
+        },
+        {
+          "icone": "camadas",
+          "titulo": "Regiões",
+          "sub": "main, h1",
+          "detalhe": "<main> marca o conteúdo principal e um <h1> diz do que a página trata. O agente separa a tarefa do menu e do rodapé."
+        },
+        {
+          "icone": "chat",
+          "titulo": "Idioma",
+          "sub": "lang",
+          "detalhe": "<html lang=\"pt-BR\"> diz em que língua está o texto. Leitores de tela pronunciam certo; ferramentas de leitura sabem o que estão lendo."
+        },
+        {
+          "icone": "sol",
+          "titulo": "Imagem",
+          "sub": "alt",
+          "detalhe": "Toda <img> com conteúdo ganha alt que descreve o que ela mostra. Imagem decorativa leva alt=\"\" e some da árvore."
+        },
+        {
+          "icone": "megafone",
+          "titulo": "Resultado",
+          "sub": "role=status",
+          "forte": true,
+          "detalhe": "A resposta do formulário vai num <output role=\"status\">. O agente (e o leitor de tela) acha o resultado pelo papel, sem procurar texto na tela."
+        }
+      ],
+      "legenda": "Elemento nativo primeiro: button, label, main. ARIA só onde o HTML não tem o elemento certo."
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "O formulário consertado",
+      "sub": "O trecho que mudou de antes.html para depois.html. O formulário funciona sozinho, para pessoas e para qualquer agente que opera a tela.",
+      "blocos": [
+        {
+          "rot": "Trecho · kit/site/depois.html",
+          "icone": "arquivo",
+          "conteudo": "<html lang=\"pt-BR\">\n…\n<main>\n  <h1>Agendar revisão</h1>\n  <img src=\"bike.svg\" width=\"60\" height=\"40\" alt=\"Bicicleta na bancada da oficina\">\n  <form id=\"agendar\" aria-describedby=\"ajuda\">\n    <p id=\"ajuda\">Escolha o serviço e o dia. A oficina confirma por e-mail.</p>\n    <label for=\"nome\">Seu nome</label>\n    <input id=\"nome\" name=\"nome\" autocomplete=\"name\" required>\n    <label for=\"servico\">Serviço</label>\n    <select id=\"servico\" name=\"servico\" required>\n      <option value=\"\">Escolha</option>\n      <option value=\"basica\">Revisão básica</option>\n      <option value=\"completa\">Revisão completa</option>\n    </select>\n    <label for=\"data\">Data</label>\n    <input id=\"data\" name=\"data\" type=\"date\" required>\n    <button type=\"submit\">Agendar</button>\n    <output id=\"resultado\" role=\"status\" aria-live=\"polite\"></output>\n  </form>\n</main>"
+        },
+        {
+          "rot": "Terminal · conferir depois.html",
+          "icone": "play",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode arvore.mjs depois; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Saída capturada (19/10/2026)",
+            "html": "<pre>## árvore de acessibilidade · 15 linhas · 415 bytes\n- main:\n  - heading \"Agendar revisão\" [level=1]\n  - img \"Bicicleta na bancada da oficina\"\n  - paragraph: Escolha o serviço e o dia. A oficina confirma por e-mail.\n  - text: Seu nome\n  - textbox \"Seu nome\"\n  - text: Serviço\n  - combobox \"Serviço\":\n    - option \"Escolha\" [selected]\n    - option \"Revisão básica\"\n    - option \"Revisão completa\"\n  - text: Data\n  - textbox \"Data\"\n  - button \"Agendar\"\n  - status\n## conferência · http://127.0.0.1:PORTA/depois.html\nproblemas: 0\nsaída: 0</pre><p>Agora tudo tem papel e nome: <code>heading</code>, <code>img</code> com descrição, os três campos, o <code>button \"Agendar\"</code> e o <code>status</code> para a resposta. A árvore cresceu de 182 para 415 bytes, e a conferência dá zero.</p>"
+          },
+          {
+            "rot": "Erro comum: consertar com ARIA no div",
+            "html": "<p>Pôr <code>role=\"button\"</code> e <code>aria-label</code> no <code>div</code> clicável faz a árvore mostrar um botão, mas ele não recebe foco pelo teclado nem dispara com Enter sem mais JavaScript, e não envia o formulário. O <code>arvore.mjs</code> continua acusando <code>&lt;div&gt; clicável que não é botão</code>, de propósito: troque pelo <code>button</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "A sua cópia para consertar",
+      "sub": "Copie antes.html para uma pasta sua e confira: 10 problemas. Depois edite a cópia até zerar. O arvore.mjs aceita o caminho de qualquer .html.",
+      "blocos": [
+        {
+          "rot": "Terminal · copiar e conferir",
+          "icone": "terminal",
+          "conteudo": "O=${TMPDIR:-/tmp}/oficina\nmkdir -p $O && cp ~/projetos/formacao-webmcp-base-v72/kit/site/antes.html $O/\ncd ~/projetos/formacao-webmcp-base-v72/kit\nnode arvore.mjs $O/antes.html | tail -3; echo \"saída: ${PIPESTATUS[0]}\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Saída capturada (19/10/2026)",
+            "html": "<pre>  - campo #servico sem &lt;label&gt;\n  - campo #data sem &lt;label&gt;\nproblemas: 10\nsaída: 1</pre><p>As três últimas linhas da conferência da cópia, antes do conserto. A lista inteira está na aula 2.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Prática",
+      "sub": "Zerar a cópia e levar o conserto para o seu site.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Zerar a cópia",
+          "min": "20 min",
+          "texto": "Edite /tmp/oficina/antes.html com os seis consertos, sem olhar depois.html. Rode o arvore.mjs a cada mudança e veja a lista encolher.",
+          "pronto": "<code>node arvore.mjs /tmp/oficina/antes.html</code> → <code>problemas: 0</code> e <code>saída: 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · O formulário ainda funciona",
+          "min": "5 min",
+          "texto": "Rode o tres-jeitos.mjs na sua cópia consertada: o agente tem de achar os três campos e o botão pelo nome e ler o resultado.",
+          "pronto": "<code>node tres-jeitos.mjs /tmp/oficina/antes.html</code> → linha <code>2 · operar</code> com <code>controles na árvore · 0 sem nome</code> e <code>saída: 0</code>."
+        },
+        {
+          "id": "e3",
+          "titulo": "E3 · Um conserto no seu site",
+          "min": "30 min",
+          "texto": "Na página do seu site da aula 2, aplique os consertos (comece pelos rótulos e pelo botão) numa cópia local ou num ambiente de teste. Publique quando a conferência baixar.",
+          "pronto": "<code>node arvore.mjs</code> na página (cópia ou publicada) mostra <code>problemas:</code> menor que o número anotado na aula 2."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Teste da aula",
+      "perguntas": [
+        {
+          "p": "Qual é o jeito certo de dar nome a um campo de texto de formulário?",
+          "opcoes": [
+            "Um elemento label ligado ao campo pelo for",
+            "Um placeholder com o nome do campo dentro dele",
+            "Um atributo title no input com o nome",
+            "Um texto em negrito logo acima do campo"
+          ],
+          "certa": 0,
+          "explica": "O label ligado pelo for vira o nome acessível e fica visível. Placeholder some ao digitar e texto solto acima do campo não fica ligado a ele.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "Por que trocar o div clicável por button, em vez de pôr role=\"button\" no div?",
+          "opcoes": [
+            "Porque role=\"button\" é proibido pela spec do WebMCP",
+            "Porque o div deixa a página bem mais lenta no celular",
+            "Porque o agente só lê elementos que têm id próprio",
+            "Porque button já traz foco, teclado e envio"
+          ],
+          "certa": 3,
+          "explica": "Elemento nativo primeiro: button recebe foco, dispara com Enter e envia o form. O role só muda o que a árvore mostra; o resto você teria de programar.",
+          "ref": "codigo"
+        },
+        {
+          "p": "A resposta do formulário aparece num div qualquer. O que muda ao usar <output role=\"status\">?",
+          "opcoes": [
+            "Nada para o agente; só muda a cor do texto na tela",
+            "O agente acha o resultado pelo papel status",
+            "O formulário passa a ser uma ferramenta WebMCP registrada",
+            "O resultado passa a ir para o servidor MCP do site"
+          ],
+          "certa": 1,
+          "explica": "status é um papel da árvore: o agente lê ali o que aconteceu depois do clique. Não tem nada de WebMCP; é HTML estável.",
+          "ref": "diagrama"
+        },
+        {
+          "p": "Este conserto de HTML depende de origin trial ou de flag no Chrome?",
+          "opcoes": [
+            "Sim, só funciona com o token do origin trial publicado",
+            "Sim, precisa da flag enable-webmcp-testing ligada",
+            "Não: é HTML estável, lido por agentes",
+            "Só no Edge 150, que tem o origin trial aberto"
+          ],
+          "certa": 2,
+          "explica": "Rótulo, botão, regiões e alt são HTML de sempre. É a base estável; o WebMCP é que é experimental.",
+          "ref": "diagrama",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "Em três frases",
+      "itens": [
+        {
+          "t": "Seis consertos",
+          "texto": "label, button, main e h1, lang, alt e status."
+        },
+        {
+          "t": "Nativo primeiro",
+          "texto": "Elemento certo antes de ARIA; ARIA não envia formulário."
+        },
+        {
+          "t": "Confira até zero",
+          "texto": "O arvore.mjs diz o que falta, na sua cópia e no seu site."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Para ir além",
+      "links": [
+        {
+          "t": "MDN: o elemento label",
+          "href": "https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/label",
+          "icone": "lupa"
+        },
+        {
+          "t": "MDN: o papel ARIA status",
+          "href": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role",
+          "icone": "lupa"
+        },
+        {
+          "t": "Kit do curso: antes.html e depois.html",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit/site",
+          "icone": "arquivo"
+        },
+        {
+          "t": "Formação inemaSEO: página rasa e o que o robô lê",
+          "href": "https://inematds.github.io/formacao-inemaseo-fundacao-v72/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

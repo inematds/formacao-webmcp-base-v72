@@ -1,0 +1,193 @@
+{
+  "id": "formacao-webmcp-base-v72",
+  "lang": "pt-BR",
+  "url": "https://inematds.github.io/formacao-webmcp-base-v72/",
+  "nome": "Base: como os agentes usam um site hoje",
+  "sub": "Formação WebMCP · curso 0",
+  "volta": {
+    "t": "Área WebMCP",
+    "href": "https://eventos.inema.pro/webmcp/"
+  },
+  "lado_card": {
+    "rot": "Formação WebMCP",
+    "t": "Curso 0 de 6",
+    "texto": "O kit deste curso: a página de exemplo e os scripts que mostram o seu site como um agente vê. Tudo local, sem chamar modelo, testado em 19/10/2026.",
+    "link": "Abrir a pasta kit/ no GitHub",
+    "href": "https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit"
+  },
+  "rodape": "INEMA.CLUB · conteúdo aberto e gratuito · formato INEMA Learning v7.2 · Formação WebMCP, curso 0 de 6 · <a href=\"https://eventos.inema.pro/webmcp/\">eventos.inema.pro/webmcp</a> · <a href=\"https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit\">kit do curso no GitHub</a> · <a href=\"https://inema.club/\">inema.club</a>",
+  "videos": {
+    "webmcp-short": {
+      "titulo": "WebMCP em 30 segundos",
+      "duracao": "29 s",
+      "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp.mp4",
+      "vtt": "assets/vtt/webmcp-short.vtt",
+      "poster": "assets/img/webmcp-short.jpg",
+      "pagina": "https://eventos.inema.pro/webmcp/",
+      "idiomas": {
+        "en": {
+          "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp-en.mp4",
+          "vtt": "assets/vtt/webmcp-short-en.vtt",
+          "duracao": "30 s",
+          "pagina": "https://eventos.inema.pro/webmcp/en/"
+        },
+        "es": {
+          "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp-es.mp4",
+          "vtt": "assets/vtt/webmcp-short-es.vtt",
+          "duracao": "28 s",
+          "pagina": "https://eventos.inema.pro/webmcp/es/"
+        }
+      }
+    }
+  },
+  "inicio": {
+    "kicker": "Formação WebMCP · curso 0 de 6 · 8 aulas",
+    "titulo": "Base: como os agentes usam um site hoje, e o que o seu site mostra a eles",
+    "lead": "Ler, operar a tela e chamar ferramenta: os três jeitos de um agente usar o seu site. Você vê a árvore de acessibilidade que ele recebe, conserta o HTML, situa MCP e WebMCP, lê o estado do rascunho com data e sai com o diagnóstico do seu site. Tudo local, sem gastar cota.",
+    "cta": "Começar pela aula 1",
+    "cta2": {
+      "t": "Ver a área WebMCP",
+      "href": "https://eventos.inema.pro/webmcp/"
+    },
+    "capa_alt": "Monitor escuro com um navegador aberto num formulário e um cabo plugado num conector ao lado.",
+    "numeros": [
+      { "v": "8", "t": "aulas" },
+      { "v": "21", "t": "exercícios com saída esperada" },
+      { "v": "7", "t": "scripts no kit, todos locais" },
+      { "v": "0", "t": "chamadas a modelo" }
+    ],
+    "aulas_titulo": "As aulas",
+    "aulas_sub": "Do que o agente faz hoje ao plano do seu site: três jeitos, a árvore, o HTML, MCP e WebMCP, estável × rascunho, quem chega, o diagnóstico e o plano.",
+    "blocos": [
+      {
+        "t": "Para quem é",
+        "itens": [
+          "Dev web, maker ou dono técnico de site que edita HTML e JavaScript e roda comandos no terminal.",
+          "Quem quer que agentes de IA usem o site, no navegador e por MCP, e nunca mexeu nisso.",
+          "Quem ouviu falar de WebMCP e quer saber o que é estável e o que ainda é rascunho."
+        ]
+      },
+      {
+        "t": "O que você sai fazendo",
+        "itens": [
+          "Rodar contra a sua página os três jeitos de um agente usar um site e ver qual funciona.",
+          "Ler a árvore de acessibilidade que o agente recebe e zerar os problemas do HTML.",
+          "Dizer, com data e fonte, em que pé estão o WebMCP e as posições dos navegadores.",
+          "Rodar o WebMCP Readiness na sua máquina e montar o plano do seu site para agentes."
+        ]
+      },
+      {
+        "t": "Onde este curso entra na Formação WebMCP",
+        "itens": [
+          "É o curso 0: a base dos outros cinco. Ordem sugerida: 0 → 1 → 2 → 3 → 4 → 5.",
+          "Depois dele: 1 · servidor MCP do seu serviço, 2 · WebMCP na página, 3 · agentes de navegador, 4 · segurança, 5 · expert.",
+          "Antes de começar: Node 20 ou mais novo, git e Python 3. Linux ou macOS; no Windows, use o WSL."
+        ]
+      }
+    ]
+  },
+  "ui": {
+    "pular": "Pular para o conteúdo",
+    "aulas": "Aulas",
+    "concluido": "concluído",
+    "aula": "Aula",
+    "nesta_aula": "Nesta aula, você vai aprender:",
+    "objetivo": "Objetivo:",
+    "proxima_aula": "Próxima aula",
+    "aula_anterior": "Aula anterior",
+    "voltar_inicio": "Voltar ao início do curso",
+    "marcar_concluida": "Marcar aula como concluída",
+    "dg_dica": "Clique em cada bloco do diagrama para ver o que ele faz.",
+    "copiar": "Copiar",
+    "copiado": "Copiado",
+    "selo_simulacao": "Simulação: exemplo ilustrativo",
+    "selo_real": "Exemplo do repositório",
+    "pronto_quando": "Pronto quando:",
+    "fiz": "Fiz este exercício",
+    "video_pagina": "Página do vídeo com roteiro",
+    "pergunta": "Pergunta",
+    "de": "de",
+    "cert_tag": "competência",
+    "correto": "Correto",
+    "errado": "Não é essa",
+    "quiz_aguarda": "Escolha uma alternativa. A explicação aparece depois da sua tentativa.",
+    "proxima_pergunta": "Próxima pergunta",
+    "quiz_ver": "Ver resultado",
+    "quiz_fim": "Teste concluído",
+    "quiz_total": "Você acertou {a} de {n}. Acertando todas, a aula é marcada como concluída.",
+    "aparencia": "Aparência",
+    "tamanho_texto": "Tamanho do texto",
+    "tema": "Tema",
+    "tema_escuro": "Escuro",
+    "tema_papel": "Papel claro",
+    "role_dica": "Role a página: cada etapa abaixo acende a sua parte do diagrama.",
+    "pre_requisito": "requer",
+    "ver_aula": "Ver a aula",
+    "mapa_dica": "Clique num exercício para ver o que fazer e o \"pronto quando\".",
+    "etapas": "Etapas",
+    "exercicios": "exercícios",
+    "rever": "Rever:",
+    "revisar_erradas": "Revisar as erradas",
+    "refazer": "Refazer o teste",
+    "h_semana": "h por semana",
+    "data_inicio": "Data de início",
+    "ritmo": "Tempo disponível",
+    "gerar_plano": "Gerar meu plano",
+    "baixar_md": "Baixar plano.md",
+    "baixar_ics": "Baixar para o calendário (.ics)",
+    "ind_estudo": "Estudo (aulas)",
+    "ind_pratica": "Prática declarada",
+    "ind_nota": "Prática = exercícios que você marcou como feitos. A comprovação vem na prova da certificação.",
+    "estudo": {
+      "titulo": "Seu estudo",
+      "continuar": "Continuar de onde parei",
+      "comecar": "Começar pela aula 1",
+      "cta_continuar": "Continuar a aula {n}",
+      "hoje": "hoje",
+      "ontem": "ontem",
+      "ha_dias": "há {n} dias",
+      "desempenho": "Desempenho nos testes",
+      "notas": "Minhas anotações",
+      "dados": "Copiar meus dados",
+      "sem_testes": "Nenhum teste feito ainda. O teste fica no fim de cada aula.",
+      "nao_fez": "teste ainda não feito",
+      "ultimo": "Último",
+      "melhor": "Melhor",
+      "tentativas": "tentativas",
+      "tentativa": "tentativa",
+      "tudo_certo": "Acertou tudo no último teste.",
+      "rever": "Para rever",
+      "resposta": "Resposta certa:",
+      "ir_teste": "Refazer o teste",
+      "sem_notas": "Nenhuma anotação ainda. Na aula, selecione um trecho do texto e toque em Marcar ou Anotar.",
+      "so_marcado": "(só marcado)",
+      "marcar": "Marcar",
+      "anotar": "Anotar",
+      "salvar": "Salvar",
+      "apagar": "Apagar marca",
+      "fechar": "Fechar",
+      "nota_ph": "Escreva sua anotação sobre este trecho…",
+      "um_bloco": "Marque dentro de um parágrafo só.",
+      "nao_marca": "Este trecho não pode ser marcado.",
+      "dados_exp": "Seu progresso, suas anotações e as notas dos testes ficam só neste navegador. Baixe uma cópia (.json) para guardar ou para continuar em outro computador ou navegador; lá, carregue a cópia. Carregar soma com o que já existe e não apaga nada.",
+      "exportar": "Baixar cópia",
+      "importar": "Carregar cópia",
+      "import_ok": "Cópia carregada ({n} itens). Atualizando a página…",
+      "import_erro": "Arquivo não reconhecido. Nada foi alterado.",
+      "import_outro": "Esta cópia é de outro curso. Nada foi alterado.",
+      "export_ok": "Cópia baixada."
+    },
+    "conv_dica": "Escolha a sua resposta. O comentário aparece logo depois e a conversa segue conforme a escolha.",
+    "conv_voce": "Você",
+    "conv_escolha": "Sua resposta",
+    "conv_boa": "Boa escolha",
+    "conv_meio": "Dá para melhorar",
+    "conv_ruim": "Escolha fraca",
+    "conv_fim": "Fim da conversa",
+    "conv_placar": "Você fez {p} de {m} pontos possíveis.",
+    "conv_licao": "Lição:",
+    "conv_recomecar": "Recomeçar a conversa",
+    "conv_feita": "Seu melhor placar: {p} de {m} pontos."
+  },
+  "icone": "camadas"
+}

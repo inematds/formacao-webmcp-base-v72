@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oficina Pedal Livre</title>
+<!-- Página de exemplo do curso (fictícia). Versão "antes": parece certa na tela, mas o agente não acha os nomes. -->
+<style>
+  body { font-family: system-ui, sans-serif; background: #0c0c10; color: #eee; margin: 0; padding: 24px; }
+  .caixa { max-width: 420px; background: #18181f; padding: 20px; border-radius: 10px; }
+  .titulo { font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+  input, select { display: block; width: 100%; margin: 8px 0; padding: 8px; box-sizing: border-box; }
+  .botao { background: #FACC15; color: #0c0c10; padding: 10px; text-align: center; border-radius: 6px; cursor: pointer; font-weight: 700; }
+  #resultado { margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="caixa">
+  <div class="titulo">Agendar revisão</div>
+  <img src="bike.svg" width="60" height="40">
+  <input id="nome" placeholder="Seu nome">
+  <select id="servico">
+    <option value="">Escolha</option>
+    <option value="basica">Revisão básica</option>
+    <option value="completa">Revisão completa</option>
+  </select>
+  <input id="data" type="date">
+  <div class="botao" onclick="agendar()">Agendar</div>
+  <div id="resultado"></div>
+</div>
+<script>
+  function agendar() {
+    const nome = document.getElementById("nome").value.trim();
+    const servico = document.getElementById("servico").value;
+    const data = document.getElementById("data").value;
+    const r = document.getElementById("resultado");
+    r.textContent = nome && servico && data
+      ? `Pedido recebido (simulação): revisão ${servico} em ${data}, ${nome}`
+      : "Preencha nome, serviço e data.";
+  }
+</script>
+</body>
+</html>

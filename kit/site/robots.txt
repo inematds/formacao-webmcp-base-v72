@@ -1,0 +1,23 @@
+# robots.txt de exemplo (Oficina Pedal Livre, fictícia) — decisão por finalidade, anotada.
+# Busca: liberado (queremos aparecer nas respostas).
+User-agent: OAI-SearchBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+Allow: /
+
+# Ação do usuário: liberado (o cliente cola o link no assistente e pede para ler).
+User-agent: ChatGPT-User
+User-agent: Claude-User
+User-agent: Perplexity-User
+Allow: /
+
+# Treino: bloqueado (decisão de negócio desta oficina; não tira da busca).
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: *
+Disallow: /admin/
+
+Sitemap: https://oficina.exemplo/sitemap.xml

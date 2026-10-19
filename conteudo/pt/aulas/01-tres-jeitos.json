@@ -1,0 +1,310 @@
+{
+  "slug": "tres-jeitos",
+  "num": 1,
+  "menu": "Três jeitos",
+  "titulo": "Três jeitos de um agente usar o seu site: ler, operar a tela, chamar ferramenta",
+  "titulo_curto": "Três jeitos de usar um site",
+  "minutos": 15,
+  "lead": "Quando um agente de IA chega ao seu site, ele faz uma de três coisas: lê o HTML, opera a tela como uma pessoa ou chama uma ferramenta que o site declarou. Nesta aula você roda os três contra uma página de exemplo e contra um site real, e vê qual funciona em cada caso.",
+  "objetivo": "distinguir ler, operar a tela e chamar ferramenta e ver os três rodando contra a página de exemplo do kit.",
+  "competencias": [
+    "distinguir-os-tres-jeitos",
+    "rodar-o-kit-local",
+    "ler-a-saida-do-teste"
+  ],
+  "aprende": [
+    {
+      "icone": "lupa",
+      "t": "Ler: o que um fetch tira do seu HTML"
+    },
+    {
+      "icone": "robo",
+      "t": "Operar a tela: o agente acha cada campo pelo nome"
+    },
+    {
+      "icone": "chip",
+      "t": "Chamar ferramenta: MCP no servidor, WebMCP na página"
+    },
+    {
+      "icone": "terminal",
+      "t": "O kit do curso rodando na sua máquina"
+    }
+  ],
+  "hero_alt": "Parte de trás de um monitor escuro com três cabos de espessuras diferentes chegando a conectores diferentes.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "Um pedido, três caminhos até o seu site",
+      "sub": "Clique em cada bloco.",
+      "nos": [
+        {
+          "icone": "lupa",
+          "titulo": "Ler",
+          "sub": "baixa o HTML",
+          "detalhe": "Ferramentas de busca e de fetch baixam a página e tiram o texto. Muitas não rodam JavaScript: o que não está no HTML não existe para elas. Aparecer nas respostas das IAs é assunto da Formação inemaSEO."
+        },
+        {
+          "icone": "robo",
+          "titulo": "Operar",
+          "sub": "usa a tela",
+          "detalhe": "Um agente de navegador abre a página, acha os controles e clica, digita, escolhe. O Playwright MCP entrega ao modelo a árvore de acessibilidade da página em vez de uma captura de tela (aula 2). Achar o campo depende do nome que o HTML dá a ele."
+        },
+        {
+          "icone": "chip",
+          "titulo": "Chamar",
+          "sub": "ferramenta declarada",
+          "detalhe": "O site declara uma função com nome, descrição e entrada em JSON Schema, e o agente chama. No servidor isso é MCP, estável (revisão 2026-07-28). Na página é WebMCP, rascunho de 16/10/2026 que só roda com origin trial ou flag (aulas 4 e 5)."
+        },
+        {
+          "icone": "camadas",
+          "titulo": "Seu site",
+          "sub": "os três juntos",
+          "forte": true,
+          "detalhe": "Os três convivem. Hoje quase todo agente lê ou opera a tela; poucos navegadores expõem WebMCP. Por isso o HTML bem feito vem antes de qualquer ferramenta, e a ferramenta nunca substitui o formulário."
+        }
+      ],
+      "legenda": "Quem chama ferramenta ainda é minoria em out/2026; quem lê e quem opera a tela chegam todo dia."
+    },
+    {
+      "tipo": "passos",
+      "titulo": "O mesmo pedido pelos três jeitos",
+      "sub": "Pedido: \"agende uma revisão completa para a Ana no dia 25/10\".",
+      "passos": [
+        {
+          "titulo": "Ler",
+          "sub": "sem navegador",
+          "texto": [
+            "O agente baixa o HTML e descobre que existe um formulário com três rótulos. Ele sabe o que a página oferece, mas não agenda nada: ler não envia.",
+            "Se o formulário só aparece depois do JavaScript, um leitor sem navegador nem fica sabendo dele."
+          ]
+        },
+        {
+          "titulo": "Operar a tela",
+          "sub": "navegador",
+          "texto": [
+            "O agente abre a página, acha o campo \"Seu nome\", o campo \"Serviço\", o campo \"Data\" e o botão \"Agendar\", e clica. Funciona se cada controle tiver nome.",
+            "Na página antiga do kit o nome está só no placeholder e o botão é um div: o agente trava no primeiro campo."
+          ],
+          "exemplo": {
+            "rot": "Por que trava",
+            "texto": "Um agente procura pelo papel e pelo nome (\"campo de texto Seu nome\", \"botão Agendar\"). Placeholder some quando a pessoa digita e div não é botão para quem lê a árvore."
+          }
+        },
+        {
+          "titulo": "Chamar ferramenta",
+          "sub": "WebMCP ou MCP",
+          "texto": [
+            "Se a página registrasse uma ferramenta de agendar, o agente passaria nome, serviço e data em JSON e receberia a resposta, sem clicar em nada.",
+            "No Chromium do kit a API não existe: a página de exemplo não tem token de origin trial. O inema.club tem, e ali o mesmo Chromium lista as ferramentas."
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Instalar o kit do curso",
+      "sub": "Uma vez só. Clona o repositório do curso em ~/projetos, instala o Playwright 1.63.0 (versão fixada, de 04/09/2026) e baixa o Chromium dele. Nenhum passo do curso chama modelo.",
+      "blocos": [
+        {
+          "rot": "Terminal · instalar",
+          "icone": "terminal",
+          "conteudo": "[ -d ~/projetos/formacao-webmcp-base-v72 ] || git clone -q https://github.com/inematds/formacao-webmcp-base-v72 ~/projetos/formacao-webmcp-base-v72\ncd ~/projetos/formacao-webmcp-base-v72/kit\nnpm ci --no-audit --no-fund && npx playwright install chromium\nnode -e \"import('playwright').then(p => console.log('playwright pronto:', p.chromium.executablePath().split('/').slice(-3).join('/')))\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Saída capturada (19/10/2026)",
+            "html": "<pre>added 2 packages in 210ms\nplaywright pronto: chromium-1243/chrome-linux-arm64/chrome</pre><p>Na primeira vez o <code>npx playwright install chromium</code> baixa o navegador (algumas centenas de MB). A última linha mostra a pasta do Chromium que o kit vai usar; no Mac e no Linux x86 o nome muda.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Os três jeitos contra a página de exemplo",
+      "sub": "O kit sobe a página da Oficina Pedal Livre (fictícia) num servidor só seu, em 127.0.0.1, e roda os três jeitos. depois.html tem HTML semântico; antes.html é a mesma tela sem rótulos.",
+      "blocos": [
+        {
+          "rot": "Terminal · depois e antes",
+          "icone": "play",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nfor p in depois antes; do echo \"## $p.html\"; node tres-jeitos.mjs $p; echo \"saída: $?\"; done"
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Saída capturada (19/10/2026)",
+            "html": "<pre>## depois.html\n1 · ler     2.2 KB de HTML · h1: Agendar revisão · &lt;form&gt;: 1 · &lt;label&gt;: 3\n2 · operar  achou 3 campos e o botão pelo nome · tela diz: Pedido recebido (simulação): revisão completa em 2026-10-25, Ana\n3 · chamar  document.modelContext: ausente neste Chromium 153.0.8010.12 → sem ferramentas declaradas, o agente fica no jeito 2\nsaída: 0\n## antes.html\n1 · ler     1.7 KB de HTML · h1: (sem &lt;h1&gt;) · &lt;form&gt;: 0 · &lt;label&gt;: 0\n2 · operar  travou: não achou o campo \"Seu nome\" pelo nome em 2 s (o agente teria de adivinhar pela tela)\n3 · chamar  document.modelContext: ausente neste Chromium 153.0.8010.12 → sem ferramentas declaradas, o agente fica no jeito 2\nsaída: 1</pre><p>Mesma tela, resultado oposto. Em depois.html o agente agenda; em antes.html ele não acha nem o primeiro campo e o script sai com 1. O jeito 3 está ausente nas duas: a página de exemplo não tem token de origin trial.</p>"
+          },
+          {
+            "rot": "Erro comum: \"na tela está tudo certo\"",
+            "html": "<p>A captura de tela de antes.html e a de depois.html são quase iguais: mesmo texto, mesmo botão amarelo. Quem testa só olhando acha que está pronto. O teste que conta é o do agente: achar cada controle pelo papel e pelo nome. A aula 2 mostra o que ele recebe e a aula 3 conserta.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Os três jeitos num site real",
+      "sub": "O mesmo script contra o inema.club, que é do INEMA. No seu caso, use só o seu site: o script lê e lista, nunca clica nem executa ferramenta fora do kit.",
+      "blocos": [
+        {
+          "rot": "Terminal · um site público",
+          "icone": "play",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode tres-jeitos.mjs https://inema.club/; echo \"saída: $?\""
+        },
+        {
+          "rot": "Modelo · o seu site",
+          "icone": "copiar",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode tres-jeitos.mjs https://<seu-site>/<página com formulário>; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Saída capturada (19/10/2026)",
+            "html": "<pre>1 · ler     104.2 KB de HTML · h1: INEMA.CLUB Portal INEMA · &lt;form&gt;: 1 · &lt;label&gt;: 1\n2 · operar  146 controles na árvore · 0 sem nome (esses o agente teria de adivinhar pela tela)\n3 · chamar  document.modelContext: presente neste Chromium 153.0.8010.12 · 8 ferramenta(s) registrada(s): buscar_conhecimento, buscar_cursos, comparar_cursos, consultar_atualizacoes, …\nsaída: 0</pre><p>No site real o jeito 2 conta os controles da árvore e quantos não têm nome. O jeito 3 aparece: o inema.club publica um token de origin trial numa meta tag, e o Chromium 153 do kit (dentro da faixa 149–156 do trial) expõe <code>document.modelContext</code>. O script só chama <code>getTools()</code>, que lista; não executa nenhuma ferramenta.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "video",
+      "titulo": "WebMCP em 30 segundos",
+      "sub": "Conceito em 30 s. Dois avisos de 19/10/2026: o \"formulário que vira ferramenta\" é a API declarativa, que ficou fora da spec e só existe no Chrome; e a segurança não fica só com o site: prompt injection não tem solução, e o curso 4 trata disso.",
+      "chave": "webmcp-short"
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Prática",
+      "sub": "Kit instalado, os três jeitos na página de exemplo e no seu site.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Kit instalado",
+          "min": "10 min",
+          "texto": "Rode o bloco \"instalar\". Se você já tem o repositório em ~/projetos, ele só instala as dependências.",
+          "pronto": "o bloco termina com a linha <code>playwright pronto:</code> seguida da pasta do Chromium (ex.: <code>chromium-1243/…/chrome</code>)."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · Mesma tela, resultado oposto",
+          "min": "5 min",
+          "texto": "Rode o bloco \"depois e antes\" e compare a linha 2 das duas páginas.",
+          "pronto": "<code>node tres-jeitos.mjs depois</code> → <code>2 · operar  achou 3 campos e o botão pelo nome</code> e <code>saída: 0</code>; <code>node tres-jeitos.mjs antes</code> → <code>travou</code> e <code>saída: 1</code>."
+        },
+        {
+          "id": "e3",
+          "titulo": "E3 · O seu site pelos três jeitos",
+          "min": "10 min",
+          "texto": "Rode o modelo com a página do seu site que tem o formulário mais importante (contato, agendamento, busca). Anote as três linhas: vão para o plano da aula 8.",
+          "pronto": "a saída tem as linhas <code>1 · ler</code>, <code>2 · operar</code> e <code>3 · chamar</code>, e termina em <code>saída: 0</code> (nenhum controle sem nome) ou <code>saída: 1</code> com o número de controles sem nome anotado."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Teste da aula",
+      "perguntas": [
+        {
+          "p": "Um agente baixa o HTML da sua página de agendamento e responde que existe um formulário. Qual dos três jeitos ele usou?",
+          "opcoes": [
+            "Chamar ferramenta, porque achou o formulário",
+            "Ler: tirou a informação do HTML, sem enviar nada",
+            "Operar a tela, porque viu o formulário",
+            "Nenhum: sem WebMCP o agente não entende formulário"
+          ],
+          "certa": 1,
+          "explica": "Ler é baixar e extrair. Ele sabe que o formulário existe, mas não agenda. Operar exigiria abrir a página e clicar; chamar exigiria uma ferramenta declarada.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "antes.html e depois.html parecem iguais na tela. Por que o agente trava só em antes.html?",
+          "opcoes": [
+            "Porque antes.html é mais pesada e demora a carregar",
+            "Porque antes.html não tem token de origin trial",
+            "Porque os campos não têm nome e o botão é div",
+            "Porque o Chromium do kit recusa páginas sem lang"
+          ],
+          "certa": 2,
+          "explica": "O agente procura cada controle pelo papel e pelo nome. Sem label e sem button, não há o que procurar. O token de origin trial só muda o jeito 3, ausente nas duas páginas.",
+          "ref": "codigo",
+          "cert": true
+        },
+        {
+          "p": "No inema.club o jeito 3 aparece com 8 ferramentas; na página do kit, não. O que explica a diferença no mesmo Chromium 153?",
+          "opcoes": [
+            "O inema.club tem token de origin trial; o kit não",
+            "O inema.club usa um servidor MCP no lugar do HTML da página",
+            "O WebMCP virou padrão e só a página do kit ficou desatualizada",
+            "O script do kit executa as ferramentas do inema.club"
+          ],
+          "certa": 0,
+          "explica": "WebMCP é rascunho (16/10/2026) e o Chrome só expõe a API com token de origin trial (149 a 156) ou flag local. O script só lista com getTools(), não executa nada.",
+          "ref": "codigo"
+        },
+        {
+          "p": "Por onde começar a preparar um site para agentes em out/2026?",
+          "opcoes": [
+            "Registrar ferramentas WebMCP e tirar o formulário da página",
+            "Criar um llms.txt antes de qualquer outra coisa no site",
+            "Esperar o WebMCP virar padrão para não refazer o trabalho",
+            "HTML com nomes certos, para ler e operar hoje"
+          ],
+          "certa": 3,
+          "explica": "Quase todo agente lê ou opera a tela hoje. A ferramenta vem depois e nunca substitui o formulário, que é o caminho de quem não tem a API.",
+          "ref": "diagrama"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "Em três frases",
+      "itens": [
+        {
+          "t": "Três jeitos",
+          "texto": "Ler o HTML, operar a tela, chamar uma ferramenta declarada."
+        },
+        {
+          "t": "Nome é tudo",
+          "texto": "Para operar a tela, o agente acha cada controle pelo papel e pelo nome."
+        },
+        {
+          "t": "Ferramenta é extra",
+          "texto": "WebMCP só aparece com origin trial; o formulário continua sendo o caminho."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Para ir além",
+      "links": [
+        {
+          "t": "Kit do curso: tres-jeitos.mjs",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/blob/main/kit/tres-jeitos.mjs",
+          "icone": "arquivo"
+        },
+        {
+          "t": "Playwright MCP (Microsoft): agentes com snapshot de acessibilidade",
+          "href": "https://github.com/microsoft/playwright-mcp",
+          "icone": "lupa"
+        },
+        {
+          "t": "WebMCP, Draft Community Group Report de 16/10/2026",
+          "href": "https://webmachinelearning.github.io/webmcp/",
+          "icone": "lupa"
+        },
+        {
+          "t": "Formação inemaSEO: AEO e GEO sem mito (o jeito \"ler\")",
+          "href": "https://inematds.github.io/formacao-inemaseo-ias-v72/aulas/aeo-geo-sem-mito/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

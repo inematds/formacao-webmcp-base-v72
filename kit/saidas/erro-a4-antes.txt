@@ -1,0 +1,3 @@
+sem API  · (a página não faz detecção) · botão Agendar: não
+com stub · (a página não faz detecção) · botão Agendar: não
+saída: 1

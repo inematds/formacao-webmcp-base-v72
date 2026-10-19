@@ -1,0 +1,20 @@
+Readiness 2.2.2 · kit/site/antes.html · nota 48 (Precisa de ajustes)
+  WebMCP 43 · SEO 53 · GEO 49 · AEO 49
+  falhas: 5 · avisos: 20 · ok: 5 · ferramentas WebMCP: 0 · document.modelContext no Chromium do scan: não
+  [falha] webmcp · Ferramentas descobertas
+  [falha] webmcp · Nomes e descrições
+  [falha] webmcp · Parâmetros estruturados
+  [falha] seo · Descrição nos resultados
+  [falha] seo · URL canônica
+  lembrete do próprio scanner: SEO, GEO e AEO medem sinais observáveis; não garantem indexação, ranking ou citação por sistemas de IA.
+saída: 0
+Readiness 2.2.2 · kit/site/depois.html · nota 52 (Precisa de ajustes)
+  WebMCP 43 · SEO 59 · GEO 56 · AEO 49
+  falhas: 5 · avisos: 18 · ok: 7 · ferramentas WebMCP: 0 · document.modelContext no Chromium do scan: não
+  [falha] webmcp · Ferramentas descobertas
+  [falha] webmcp · Nomes e descrições
+  [falha] webmcp · Parâmetros estruturados
+  [falha] seo · Descrição nos resultados
+  [falha] seo · URL canônica
+  lembrete do próprio scanner: SEO, GEO e AEO medem sinais observáveis; não garantem indexação, ranking ou citação por sistemas de IA.
+saída: 0

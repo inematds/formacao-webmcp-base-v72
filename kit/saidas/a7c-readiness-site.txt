@@ -1,0 +1,5 @@
+Readiness 2.2.2 · https://www.inema.club/ · nota 92 (Estrutura forte)
+  WebMCP 95 · SEO 100 · GEO 88 · AEO 77
+  falhas: 0 · avisos: 4 · ok: 26 · ferramentas WebMCP: 8 · document.modelContext no Chromium do scan: sim
+  lembrete do próprio scanner: SEO, GEO e AEO medem sinais observáveis; não garantem indexação, ranking ou citação por sistemas de IA.
+saída: 0

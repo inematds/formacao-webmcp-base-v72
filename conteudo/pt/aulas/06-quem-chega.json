@@ -1,0 +1,291 @@
+{
+  "slug": "quem-chega",
+  "num": 6,
+  "menu": "Quem chega",
+  "titulo": "Quem está chegando: robôs por finalidade e agentes assinados (o conceito)",
+  "titulo_curto": "Quem está chegando",
+  "minutos": 15,
+  "lead": "Nem todo robô de IA que visita o seu site faz a mesma coisa: uns indexam para a busca, outros leem a pedido de uma pessoa, outros coletam para treino. O robots.txt pede por finalidade, mas não prova quem é quem. Nesta aula você lê o seu robots.txt por finalidade e entende o que o rascunho Web Bot Auth propõe para identificar o agente.",
+  "objetivo": "ler o seu robots.txt por finalidade e entender por que só uma assinatura na requisição identifica o agente.",
+  "competencias": [
+    "ler-robots-por-finalidade",
+    "separar-pedido-de-identidade",
+    "situar-web-bot-auth"
+  ],
+  "aprende": [
+    {
+      "icone": "lupa",
+      "t": "Busca, ação do usuário e treino: três finalidades"
+    },
+    {
+      "icone": "arquivo",
+      "t": "O robots.txt lido pelo robots.py do kit"
+    },
+    {
+      "icone": "cadeado",
+      "t": "Por que o nome no User-Agent não prova nada"
+    },
+    {
+      "icone": "escudo",
+      "t": "Web Bot Auth e signed agents, como conceito"
+    }
+  ],
+  "hero_alt": "Porta de entrada de uma oficina à noite com um leitor de crachá iluminado e um robô humanoide industrial parado diante dela.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "Quem bate na porta, e como saber",
+      "sub": "Clique em cada bloco.",
+      "nos": [
+        {
+          "icone": "lupa",
+          "titulo": "Busca",
+          "sub": "índice",
+          "itens": [
+            {
+              "icone": "robo",
+              "t": "OAI-SearchBot, Claude-SearchBot"
+            },
+            {
+              "icone": "robo",
+              "t": "PerplexityBot, Googlebot, Bingbot"
+            }
+          ],
+          "detalhe": "Montam o índice que as respostas usam. Bloquear costuma tirar o site das respostas de busca daquela IA. A decisão completa está na Formação inemaSEO."
+        },
+        {
+          "icone": "usuario",
+          "titulo": "Usuário",
+          "sub": "a pedido",
+          "itens": [
+            {
+              "icone": "robo",
+              "t": "ChatGPT-User, Claude-User"
+            },
+            {
+              "icone": "robo",
+              "t": "Perplexity-User"
+            }
+          ],
+          "detalhe": "Visitam a página quando uma pessoa pede ao assistente para ler ou abrir o endereço. É o mais perto de um agente agindo em nome de alguém."
+        },
+        {
+          "icone": "cerebro",
+          "titulo": "Treino",
+          "sub": "modelos futuros",
+          "itens": [
+            {
+              "icone": "robo",
+              "t": "GPTBot, ClaudeBot"
+            },
+            {
+              "icone": "robo",
+              "t": "Google-Extended"
+            }
+          ],
+          "detalhe": "Coletam texto para treinar modelos. Liberar ou bloquear é decisão de negócio; bloquear treino não tira da busca."
+        },
+        {
+          "icone": "cadeado",
+          "titulo": "Assinatura",
+          "sub": "quem é",
+          "forte": true,
+          "detalhe": "O robots.txt é um pedido, e o nome no User-Agent pode ser falsificado. O rascunho Web Bot Auth propõe que o agente assine a requisição (HTTP Message Signatures, RFC 9421) e publique as chaves; o site confere. Ainda é rascunho no IETF."
+        }
+      ],
+      "legenda": "Finalidade se decide no robots.txt; identidade só com assinatura. A segurança disso a fundo é o curso 4."
+    },
+    {
+      "tipo": "passos",
+      "titulo": "Pedido × identidade",
+      "sub": "O que cada coisa resolve.",
+      "passos": [
+        {
+          "titulo": "robots.txt",
+          "sub": "pede",
+          "texto": [
+            "Um grupo por User-agent com Allow e Disallow. Quem respeita são os robôs que seguem a regra; quem impõe é a CDN ou o firewall.",
+            "Escreva a decisão por finalidade e anote o motivo num comentário. O passo a passo completo é da aula 6 do curso Fundação da inemaSEO."
+          ]
+        },
+        {
+          "titulo": "User-Agent",
+          "sub": "declara",
+          "texto": [
+            "Cada robô se apresenta pelo nome no cabeçalho User-Agent. É só texto: qualquer programa pode escrever \"GPTBot\". Serve para estatística, não para confiar."
+          ]
+        },
+        {
+          "titulo": "Assinatura",
+          "sub": "prova",
+          "texto": [
+            "No rascunho draft-ietf-webbotauth-httpsig-protocol (set/2026, Cloudflare e Google, documento de grupo do IETF, ainda não RFC), o agente assina a requisição e manda o cabeçalho Signature-Agent; as chaves ficam num diretório JWKS em URI well-known.",
+            "Na Cloudflare, desde 01/07/2026, signed agents contam como Verified, com o campo \"Direct versus Intermediary access\"."
+          ],
+          "exemplo": {
+            "rot": "O que muda para você agora",
+            "texto": "Nada para instalar neste curso. Saber que existe ajuda a ler o painel da CDN e a não confiar só no nome do robô."
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "O robots.txt lido por finalidade",
+      "sub": "O robots.py lê um robots.txt (arquivo ou URL) e diz, por finalidade, quem pode entrar na raiz do site. Regra simplificada: só a raiz \"/\"; parcial = bloqueia alguns caminhos.",
+      "blocos": [
+        {
+          "rot": "Terminal · o robots.txt de exemplo",
+          "icone": "lupa",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\npython3 robots.py site/robots.txt; echo \"saída: $?\""
+        },
+        {
+          "rot": "Modelo · o seu site",
+          "icone": "copiar",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\npython3 robots.py https://<seu-site>/robots.txt; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Saída capturada (19/10/2026)",
+            "html": "<pre>grupos no arquivo: *, chatgpt-user, claude-searchbot, claude-user, claudebot, google-extended, gptbot, oai-searchbot, perplexity-user, perplexitybot\nbusca            OAI-SearchBot liberado · Claude-SearchBot liberado · PerplexityBot liberado · Googlebot parcial (*) · Bingbot parcial (*)\nação do usuário  ChatGPT-User liberado · Claude-User liberado · Perplexity-User liberado\ntreino           GPTBot bloqueado · ClaudeBot bloqueado · Google-Extended bloqueado\nlembrete: robots.txt pede, não identifica. Quem prova quem é: assinatura na requisição (Web Bot Auth, rascunho IETF).\nsaída: 0</pre><p>A oficina de exemplo libera busca e ação do usuário e bloqueia treino. Googlebot e Bingbot não têm grupo próprio: valem as regras do <code>*</code>, que bloqueia só /admin/ (por isso \"parcial\").</p>"
+          },
+          {
+            "rot": "Um site real: inema.club",
+            "html": "<pre>grupos no arquivo: *, bingbot, claude-searchbot, claudebot, googlebot, oai-searchbot, perplexitybot\nbusca            OAI-SearchBot liberado · Claude-SearchBot liberado · PerplexityBot liberado · Googlebot liberado · Bingbot liberado\nação do usuário  ChatGPT-User liberado (*) · Claude-User liberado (*) · Perplexity-User liberado (*)\ntreino           GPTBot liberado (*) · ClaudeBot liberado · Google-Extended liberado (*)\nlembrete: robots.txt pede, não identifica. Quem prova quem é: assinatura na requisição (Web Bot Auth, rascunho IETF).\nsaída: 0</pre><p>O inema.club libera tudo, inclusive treino: é conteúdo aberto e escolheu liberar. Os robôs de ação do usuário não têm grupo próprio e caem no <code>*</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Prática",
+      "sub": "O exemplo, o seu robots.txt e a decisão anotada.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · O exemplo por finalidade",
+          "min": "5 min",
+          "texto": "Rode o bloco do robots.txt de exemplo e abra kit/site/robots.txt para ver os comentários de cada grupo.",
+          "pronto": "<code>python3 robots.py site/robots.txt</code> → linha <code>treino</code> com <code>GPTBot bloqueado</code> e <code>saída: 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · O seu robots.txt",
+          "min": "10 min",
+          "texto": "Rode o modelo com o endereço do seu site. Copie as linhas de busca, ação do usuário e treino para o plano (seção \"Quem pode entrar\").",
+          "pronto": "a saída tem as linhas <code>busca</code>, <code>ação do usuário</code> e <code>treino</code> e termina em <code>saída: 0</code>."
+        },
+        {
+          "id": "e3",
+          "titulo": "E3 · O que vale de verdade",
+          "min": "10 min",
+          "texto": "Abra o painel da sua CDN ou hospedagem e veja se há bloqueio de robôs de IA ou lista de agentes verificados. Anote se ela concorda com o robots.txt.",
+          "pronto": "o plano tem uma linha dizendo qual CDN (ou \"sem CDN\") e se o painel concorda com o robots.txt."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Teste da aula",
+      "perguntas": [
+        {
+          "p": "Uma pessoa cola o link do seu site no assistente e pede um resumo. Que tipo de robô lê a página?",
+          "opcoes": [
+            "Um robô de treino, como o GPTBot da OpenAI",
+            "Um robô de busca, como o Bingbot da Microsoft",
+            "Um robô de ação do usuário (ChatGPT-User)",
+            "Nenhum: o assistente não acessa sites de verdade"
+          ],
+          "certa": 2,
+          "explica": "Robôs de ação do usuário visitam a página a pedido de alguém. Bloqueá-los impede o assistente de ler o seu site até quando o cliente pede.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "O seu log mostra User-Agent \"GPTBot\". Isso prova que foi a OpenAI?",
+          "opcoes": [
+            "Não: o User-Agent é texto que qualquer um escreve",
+            "Sim: o navegador não deixa falsificar esse nome no cabeçalho",
+            "Sim, se o robots.txt do site liberar o GPTBot",
+            "Não, porque o GPTBot é robô de busca, não de treino"
+          ],
+          "certa": 0,
+          "explica": "O nome declara, não prova. Prova vem de assinatura na requisição (Web Bot Auth, rascunho) ou da verificação que a CDN faz.",
+          "ref": "passos",
+          "cert": true
+        },
+        {
+          "p": "O que o rascunho Web Bot Auth propõe?",
+          "opcoes": [
+            "Um novo campo no robots.txt com senha para cada robô",
+            "Que o site registre ferramentas WebMCP para cada robô",
+            "Bloquear todos os agentes por padrão na CDN",
+            "Que o agente assine a requisição e o site confira"
+          ],
+          "certa": 3,
+          "explica": "Assinatura HTTP (RFC 9421), cabeçalho Signature-Agent e chaves num diretório JWKS em URI well-known. Rascunho no IETF, não RFC.",
+          "ref": "diagrama"
+        },
+        {
+          "p": "O robots.txt libera tudo, mas um agente não consegue ler o site. Onde olhar primeiro?",
+          "opcoes": [
+            "No llms.txt, que diz quem pode ler o site",
+            "No painel da CDN: ela impõe; o robots.txt pede",
+            "No token de origin trial publicado na meta tag da página",
+            "No servidor MCP que atende os agentes"
+          ],
+          "certa": 1,
+          "explica": "Quem bloqueia de verdade é a CDN ou o firewall. Se o painel bloqueia o que o robots.txt libera, vale o painel.",
+          "ref": "passos"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "Em três frases",
+      "itens": [
+        {
+          "t": "Três finalidades",
+          "texto": "Busca, ação do usuário e treino: decida uma por uma."
+        },
+        {
+          "t": "Pedido não é prova",
+          "texto": "robots.txt pede, User-Agent declara, a CDN impõe."
+        },
+        {
+          "t": "Assinatura é o caminho",
+          "texto": "Web Bot Auth assina a requisição; ainda é rascunho."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Para ir além",
+      "links": [
+        {
+          "t": "Formação inemaSEO: robots.txt por finalidade (dono do assunto)",
+          "href": "https://inematds.github.io/formacao-inemaseo-fundacao-v72/aulas/robots-por-finalidade/",
+          "icone": "seta"
+        },
+        {
+          "t": "IETF: draft-ietf-webbotauth-httpsig-protocol",
+          "href": "https://datatracker.ietf.org/doc/html/draft-ietf-webbotauth-httpsig-protocol",
+          "icone": "lupa"
+        },
+        {
+          "t": "Cloudflare: signed agents",
+          "href": "https://developers.cloudflare.com/bots/concepts/bot/signed-agents/",
+          "icone": "escudo"
+        },
+        {
+          "t": "Curso 4 da formação: segurança e confiança entre site e agente",
+          "href": "https://inematds.github.io/formacao-webmcp-seguranca-v72/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

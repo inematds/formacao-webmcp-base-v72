@@ -1,0 +1,12 @@
+  ainda tem <marcador> em: Site e data
+  ainda tem <marcador> em: Como os agentes usam o site hoje
+  ainda tem <marcador> em: O que o agente enxerga
+  ainda tem <marcador> em: Quem pode entrar
+  ainda tem <marcador> em: Readiness
+  ainda tem <marcador> em: WebMCP
+  ainda tem <marcador> em: Próximos passos
+  nenhuma data dd/mm/aaaa no plano
+0/7 seções preenchidas · data: nenhuma
+saída: 1
+7/7 seções preenchidas · data: 19/10/2026
+saída: 0

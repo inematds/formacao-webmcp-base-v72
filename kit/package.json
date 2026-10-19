@@ -1,0 +1,9 @@
+{
+  "name": "kit-formacao-webmcp-base",
+  "private": true,
+  "type": "module",
+  "description": "Kit do curso 0 da Formação WebMCP (INEMA.CLUB): página de exemplo e scripts que mostram o seu site como um agente vê. Tudo local, sem chamar modelo.",
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}

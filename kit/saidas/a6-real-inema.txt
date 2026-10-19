@@ -1,0 +1,6 @@
+grupos no arquivo: *, bingbot, claude-searchbot, claudebot, googlebot, oai-searchbot, perplexitybot
+busca            OAI-SearchBot liberado · Claude-SearchBot liberado · PerplexityBot liberado · Googlebot liberado · Bingbot liberado
+ação do usuário  ChatGPT-User liberado (*) · Claude-User liberado (*) · Perplexity-User liberado (*)
+treino           GPTBot liberado (*) · ClaudeBot liberado · Google-Extended liberado (*)
+lembrete: robots.txt pede, não identifica. Quem prova quem é: assinatura na requisição (Web Bot Auth, rascunho IETF).
+saída: 0

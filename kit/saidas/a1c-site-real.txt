@@ -1,0 +1,4 @@
+1 · ler     104.2 KB de HTML · h1: INEMA.CLUB Portal INEMA · <form>: 1 · <label>: 1
+2 · operar  146 controles na árvore · 0 sem nome (esses o agente teria de adivinhar pela tela)
+3 · chamar  document.modelContext: presente neste Chromium 153.0.8010.12 · 8 ferramenta(s) registrada(s): buscar_conhecimento, buscar_cursos, comparar_cursos, consultar_atualizacoes, …
+saída: 0

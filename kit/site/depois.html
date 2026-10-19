@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agendar revisão · Oficina Pedal Livre</title>
+<!-- Página de exemplo do curso (fictícia). Versão "depois": mesma tela, com HTML semântico e rótulos. -->
+<style>
+  body { font-family: system-ui, sans-serif; background: #0c0c10; color: #eee; margin: 0; padding: 24px; }
+  main { max-width: 420px; background: #18181f; padding: 20px; border-radius: 10px; }
+  h1 { font-size: 26px; margin: 0 0 12px; }
+  label { display: block; margin-top: 10px; }
+  input, select { display: block; width: 100%; margin: 4px 0; padding: 8px; box-sizing: border-box; }
+  button { width: 100%; margin-top: 14px; background: #FACC15; color: #0c0c10; padding: 10px; border: 0; border-radius: 6px; font-weight: 700; cursor: pointer; }
+  output { display: block; margin-top: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Agendar revisão</h1>
+  <img src="bike.svg" width="60" height="40" alt="Bicicleta na bancada da oficina">
+  <form id="agendar" aria-describedby="ajuda">
+    <p id="ajuda">Escolha o serviço e o dia. A oficina confirma por e-mail.</p>
+    <label for="nome">Seu nome</label>
+    <input id="nome" name="nome" autocomplete="name" required>
+    <label for="servico">Serviço</label>
+    <select id="servico" name="servico" required>
+      <option value="">Escolha</option>
+      <option value="basica">Revisão básica</option>
+      <option value="completa">Revisão completa</option>
+    </select>
+    <label for="data">Data</label>
+    <input id="data" name="data" type="date" required>
+    <button type="submit">Agendar</button>
+    <output id="resultado" role="status" aria-live="polite"></output>
+  </form>
+</main>
+<script>
+  // O formulário funciona sozinho, para pessoas e para qualquer agente que opera a tela.
+  document.getElementById("agendar").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    document.getElementById("resultado").textContent =
+      `Pedido recebido (simulação): revisão ${f.get("servico")} em ${f.get("data")}, ${f.get("nome")}`;
+  });
+</script>
+<script src="deteccao.js"></script>
+</body>
+</html>

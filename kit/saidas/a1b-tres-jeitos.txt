@@ -1,0 +1,10 @@
+## depois.html
+1 · ler     2.2 KB de HTML · h1: Agendar revisão · <form>: 1 · <label>: 3
+2 · operar  achou 3 campos e o botão pelo nome · tela diz: Pedido recebido (simulação): revisão completa em 2026-10-25, Ana
+3 · chamar  document.modelContext: ausente neste Chromium 153.0.8010.12 → sem ferramentas declaradas, o agente fica no jeito 2
+saída: 0
+## antes.html
+1 · ler     1.7 KB de HTML · h1: (sem <h1>) · <form>: 0 · <label>: 0
+2 · operar  travou: não achou o campo "Seu nome" pelo nome em 2 s (o agente teria de adivinhar pela tela)
+3 · chamar  document.modelContext: ausente neste Chromium 153.0.8010.12 → sem ferramentas declaradas, o agente fica no jeito 2
+saída: 1

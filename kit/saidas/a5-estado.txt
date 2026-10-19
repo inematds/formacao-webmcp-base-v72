@@ -1,0 +1,8 @@
+spec WebMCP · versão de 2026-10-16 · not a W3C Standard
+  document.modelContext: 16 menções · navigator.modelContext: 0
+Chrome · An Origin Trial is live in Chrome 149
+Edge · An Origin Trial is live in Edge 150
+Firefox · mozilla/standards-positions #1412 · position: neutral
+Safari · WebKit/standards-positions #670 · position: oppose
+lido em 19/10/2026
+saída: 0

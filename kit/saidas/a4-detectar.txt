@@ -1,0 +1,3 @@
+sem API  · WebMCP ausente: o site segue pelo formulário, igual para todos · botão Agendar: sim
+com stub · WebMCP presente: aqui a página registraria as ferramentas (curso 2 da formação) · botão Agendar: sim
+saída: 0
