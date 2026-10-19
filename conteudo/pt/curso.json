@@ -20,6 +20,7 @@
     "webmcp-short": {
       "titulo": "WebMCP em 30 segundos",
       "duracao": "29 s",
+      "formato": "9:16",
       "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp.mp4",
       "vtt": "assets/vtt/webmcp-short.vtt",
       "poster": "assets/img/webmcp-short.jpg",
@@ -51,10 +52,22 @@
     },
     "capa_alt": "Monitor escuro com um navegador aberto num formulário e um cabo plugado num conector ao lado.",
     "numeros": [
-      { "v": "8", "t": "aulas" },
-      { "v": "21", "t": "exercícios com saída esperada" },
-      { "v": "7", "t": "scripts no kit, todos locais" },
-      { "v": "0", "t": "chamadas a modelo" }
+      {
+        "v": "8",
+        "t": "aulas"
+      },
+      {
+        "v": "21",
+        "t": "exercícios com saída esperada"
+      },
+      {
+        "v": "7",
+        "t": "scripts no kit, todos locais"
+      },
+      {
+        "v": "0",
+        "t": "chamadas a modelo"
+      }
     ],
     "aulas_titulo": "As aulas",
     "aulas_sub": "Do que o agente faz hoje ao plano do seu site: três jeitos, a árvore, o HTML, MCP e WebMCP, estável × rascunho, quem chega, o diagnóstico e o plano.",
