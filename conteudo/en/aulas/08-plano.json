@@ -1,0 +1,291 @@
+{
+  "slug": "plano",
+  "num": 8,
+  "menu": "Plan",
+  "titulo": "Your site's plan for agents",
+  "titulo_curto": "Your site's plan",
+  "minutos": 20,
+  "lead": "You've already run the three ways, read the tree, fixed the HTML, placed MCP and WebMCP, read the dated state, checked who gets in, and run the scanner. Now you put it all into a one-page plan, with dates, and check that it's complete. This is the plan you take to the next courses in the program.",
+  "objetivo": "build your site's plan for agents with the outputs from lessons 1 to 7 and check that it's complete.",
+  "competencias": [
+    "montar-o-plano",
+    "datar-as-decisoes",
+    "escolher-o-proximo-curso"
+  ],
+  "aprende": [
+    {
+      "icone": "camadas",
+      "t": "The course map in four steps"
+    },
+    {
+      "icone": "calendario",
+      "t": "The plan with dates, generated here"
+    },
+    {
+      "icone": "check",
+      "t": "The conferir-plano.py: seven sections, no placeholders"
+    },
+    {
+      "icone": "seta",
+      "t": "Which course in the program comes next"
+    }
+  ],
+  "hero_alt": "Dark desk seen from above with a notebook open to a hand-drawn checklist, a paper calendar, and a laptop.",
+  "secoes": [
+    {
+      "tipo": "mapa",
+      "titulo": "The course map",
+      "sub": "Four steps, the exercises in each one, and what each step delivers. Tap an exercise to see its \"done when\".",
+      "degraus": [
+        {
+          "aula": "tres-jeitos",
+          "icone": "robo",
+          "quando": "Day 1",
+          "titulo": "See",
+          "sub": "lessons 1 and 2",
+          "saida": "Your site's three lines and the tree's problem count.",
+          "passo": "Kit installed, the three ways run against the example and against your site, and the accessibility tree the agent receives."
+        },
+        {
+          "aula": "html-semantico",
+          "icone": "caneta",
+          "quando": "Day 2",
+          "titulo": "Fix",
+          "sub": "lesson 3",
+          "saida": "The zeroed copy and one fix on your site.",
+          "passo": "Requires step 1. Label, button, regions, language, alt, and status until arvore.mjs gives zero."
+        },
+        {
+          "aula": "estavel-e-rascunho",
+          "icone": "relogio",
+          "quando": "Day 3",
+          "titulo": "Place",
+          "sub": "lessons 4 to 6",
+          "saida": "A dated WebMCP note and the robots.txt read by purpose.",
+          "passo": "MCP × WebMCP with feature detection and fallback, the state read from dated sources, and who reaches the site."
+        },
+        {
+          "aula": "readiness",
+          "icone": "grafico",
+          "quando": "Day 4",
+          "titulo": "Diagnose",
+          "sub": "lesson 7",
+          "saida": "The scanner report and the first three fixes.",
+          "passo": "A local scanner with a pinned version, run on the example and on your site, read as a diagnosis."
+        }
+      ],
+      "resultado": {
+        "titulo": "At the end of the course",
+        "texto": "A one-page plan for your site and agents, with dates and with your next course chosen.",
+        "total": "11 exercises"
+      },
+      "rolagem_fim": {
+        "titulo": "The whole course",
+        "texto": "See, fix, place, and diagnose. Each step has exercises with an expected output; the plan gathers the outputs."
+      },
+      "legenda": "Suggested order: each step uses the page or the notes from the one before."
+    },
+    {
+      "tipo": "gerador",
+      "titulo": "Generate your plan with dates",
+      "sub": "Pick a start date and how much time you have each week.",
+      "curso": "Foundations: how agents use a website today",
+      "horas_padrao": 3,
+      "degraus": [
+        {
+          "titulo": "Lesson 1 · Three ways",
+          "aula": "tres-jeitos"
+        },
+        {
+          "titulo": "Lesson 2 · What the agent sees",
+          "aula": "o-que-o-agente-ve"
+        },
+        {
+          "titulo": "Lesson 3 · HTML the agent reads",
+          "aula": "html-semantico"
+        },
+        {
+          "titulo": "Lesson 4 · MCP and WebMCP",
+          "aula": "mcp-e-webmcp"
+        },
+        {
+          "titulo": "Lesson 5 · Stable × draft",
+          "aula": "estavel-e-rascunho"
+        },
+        {
+          "titulo": "Lesson 6 · Who is arriving",
+          "aula": "quem-chega"
+        },
+        {
+          "titulo": "Lesson 7 · The Readiness diagnosis",
+          "aula": "readiness"
+        }
+      ],
+      "txt": {
+        "titulo": "Plan — Base: how agents use a site today",
+        "inicio": "Start",
+        "ritmo": "Pace",
+        "termino": "Expected finish",
+        "ate": "until",
+        "pronto": "done when",
+        "semanas": "weeks",
+        "travou": "## What got stuck and what I decided",
+        "h": "h per week",
+        "exs": "exercises"
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Your site's plan and the checker",
+      "sub": "Seven sections, one for each topic in the course. conferir-plano.py flags a section that is missing, empty, or has a leftover <code>&lt;…&gt;</code>, and it requires at least one date. The kit includes the filled-in plan for the example shop.",
+      "blocos": [
+        {
+          "rot": "File · kit/plano-modelo.md",
+          "icone": "arquivo",
+          "conteudo": "# Plano do meu site para agentes\n\n## Site e data\nSite: <your site's address>\nData do diagnóstico: <dd/mm/aaaa>\n\n## Como os agentes usam o site hoje\n<output of tres-jeitos.mjs on the most important page: what worked for reading, operating, and calling>\n\n## O que o agente enxerga\nProblemas do arvore.mjs antes: <number> · depois das correções: <number>\n<the fixes made: labels, a real button, main, h1, lang, alt>\n\n## Quem pode entrar\n<output of robots.py: search, user action, and training, and the decision noted down>\n\n## Readiness\nNota: <score> em <dd/mm/aaaa> (diagnosis, not a ranking)\n<the three failures or warnings I will handle first and why>\n\n## WebMCP\nEstado lido em <dd/mm/aaaa>: spec de <date>, <browsers with an origin trial>\nDecisão: <wait | lab in course 2 | I already register tools with detection and fallback>\n\n## Próximos passos\n<the next course in the program and the date when I will review this plan>"
+        },
+        {
+          "rot": "Terminal · empty template and filled-in example",
+          "icone": "check",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\npython3 conferir-plano.py plano-modelo.md; echo \"saída: $?\"\npython3 conferir-plano.py exemplo-plano.md; echo \"saída: $?\""
+        },
+        {
+          "rot": "Template · your plan",
+          "icone": "copiar",
+          "conteudo": "cp ~/projetos/formacao-webmcp-base-v72/kit/plano-modelo.md ~/meu-plano.md\n# fill in ~/meu-plano.md with the outputs from lessons 1 to 7\npython3 ~/projetos/formacao-webmcp-base-v72/kit/conferir-plano.py ~/meu-plano.md; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>  ainda tem &lt;marcador&gt; em: Site e data\n  ainda tem &lt;marcador&gt; em: Como os agentes usam o site hoje\n  ainda tem &lt;marcador&gt; em: O que o agente enxerga\n  ainda tem &lt;marcador&gt; em: Quem pode entrar\n  ainda tem &lt;marcador&gt; em: Readiness\n  ainda tem &lt;marcador&gt; em: WebMCP\n  ainda tem &lt;marcador&gt; em: Próximos passos\n  nenhuma data dd/mm/aaaa no plano\n0/7 seções preenchidas · data: nenhuma\nsaída: 1\n7/7 seções preenchidas · data: 19/10/2026\nsaída: 0</pre><p>The empty template fails on all seven sections, on purpose: it is the criterion before the work. The shop example passes with 7/7 and the diagnosis date.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Practice",
+      "sub": "The complete plan and the next course.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Your site's plan",
+          "min": "30 min",
+          "texto": "Copy the template to ~/meu-plano.md and fill in each section with the outputs you noted down in lessons 1 to 7. Use kit/exemplo-plano.md as a reference for length.",
+          "pronto": "<code>python3 conferir-plano.py ~/meu-plano.md</code> → <code>7/7 seções preenchidas</code> with a date and <code>saída: 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · The next course and the review date",
+          "min": "5 min",
+          "texto": "In the \"Próximos passos\" section, choose the next course: course 1 if your service has an API and you want an MCP server; course 2 if the action lives on the page. Mark the date when you will run estado.sh again.",
+          "pronto": "the \"Próximos passos\" section of the plan names a course in the program and a review date in dd/mm/aaaa format."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Final test",
+      "sub": "Four questions about the whole course.",
+      "perguntas": [
+        {
+          "p": "Which of these is a stable base for preparing a site for agents in Oct 2026?",
+          "opcoes": [
+            "HTML with labels, buttons, and regions",
+            "WebMCP in every browser since 2026",
+            "The declarative API with toolname, which is in the spec",
+            "llms.txt as a guarantee of being cited by AIs"
+          ],
+          "certa": 0,
+          "explica": "Semantic HTML is stable and serves both people who read the screen and agents that operate it. WebMCP is a draft with an origin trial, the declarative API was left out of the spec, and llms.txt has no measured effect.",
+          "ref": "mapa",
+          "cert": true
+        },
+        {
+          "p": "A coworker says: \"I'm going to register WebMCP tools and remove the form, because it's a standard now.\" What do you answer?",
+          "opcoes": [
+            "Right, as long as you use navigator.modelContext in the code",
+            "Right, Safari already supports it and so does Firefox",
+            "Wrong: it's a draft, and the form is the fallback",
+            "Right, if the Readiness score is above 90 on the site"
+          ],
+          "certa": 2,
+          "explica": "Draft from 10/16/2026, origin trial in Chrome and Edge, WebKit against. Without the form, almost every visitor loses the path.",
+          "ref": "mapa",
+          "cert": true
+        },
+        {
+          "p": "What should the plan keep from the Readiness?",
+          "opcoes": [
+            "Only the overall score, to compare with the competition",
+            "The score as a ranking goal for next month",
+            "Nothing; the Readiness is no use for planning the site",
+            "The dated score and the first failures to fix"
+          ],
+          "certa": 3,
+          "explica": "The plan comes from the failures, by priority. The dated score is a reference to compare against later, not a ranking promise.",
+          "ref": "codigo"
+        },
+        {
+          "p": "Your booking service has an API, and you want Claude Code or Codex to book through it. Which course comes next?",
+          "opcoes": [
+            "Course 2, WebMCP on your site's page",
+            "Course 1, MCP server for your service",
+            "Course 3, browser agents on your site",
+            "None: just adjust robots.txt"
+          ],
+          "certa": 1,
+          "explica": "An action that lives in a service with an API is a case for an MCP server, the stable side. WebMCP is for the action that lives on the open page.",
+          "ref": "pratica"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "The course in three sentences",
+      "itens": [
+        {
+          "t": "See how the agent sees",
+          "texto": "Three ways, the accessibility tree, and your HTML."
+        },
+        {
+          "t": "Separate the base from the lab",
+          "texto": "HTML and MCP are stable; WebMCP is a draft with a date."
+        },
+        {
+          "t": "A plan, not a score",
+          "texto": "A dated diagnosis, failures by priority, and the next course."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Keep going here",
+      "links": [
+        {
+          "t": "Next: course 1 · MCP server for your service",
+          "href": "https://inematds.github.io/formacao-webmcp-mcp-v72/en/",
+          "icone": "seta"
+        },
+        {
+          "t": "Course 2 · WebMCP on your site",
+          "href": "https://inematds.github.io/formacao-webmcp-site-v72/en/",
+          "icone": "seta"
+        },
+        {
+          "t": "WebMCP Area",
+          "href": "https://eventos.inema.pro/webmcp/",
+          "icone": "camadas"
+        },
+        {
+          "t": "Course kit: plano-modelo.md and conferir-plano.py",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit",
+          "icone": "arquivo"
+        }
+      ]
+    }
+  ]
+}

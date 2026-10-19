@@ -1,0 +1,250 @@
+{
+  "slug": "o-que-o-agente-ve",
+  "num": 2,
+  "menu": "What it sees",
+  "titulo": "What the agent sees: accessibility tree × screenshot",
+  "titulo_curto": "What the agent sees",
+  "minutos": 15,
+  "lead": "You see colors, a yellow button, and a date field. A browser agent like Playwright MCP gets something else: a list of roles and names, the accessibility tree. In this lesson you print that tree for the example page, compare it with the screenshot, and learn to read what's missing.",
+  "objetivo": "read the accessibility tree the agent receives and compare it with the screenshot of the same page.",
+  "competencias": [
+    "read-the-accessibility-tree",
+    "find-a-control-with-no-name",
+    "compare-tree-and-screen"
+  ],
+  "aprende": [
+    {
+      "icone": "camadas",
+      "t": "Role and name: the two things the agent looks for"
+    },
+    {
+      "icone": "lupa",
+      "t": "The page tree printed by the kit"
+    },
+    {
+      "icone": "x",
+      "t": "The gaps: a control with no name, a div pretending to be a button"
+    },
+    {
+      "icone": "grafico",
+      "t": "Tree as text × screen as pixels"
+    }
+  ],
+  "hero_alt": "Dark monitor showing a form page, with thin outlines of boxes over it that reveal the page structure.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "From page to click",
+      "sub": "Click each block.",
+      "nos": [
+        {
+          "icone": "sol",
+          "titulo": "Screen",
+          "sub": "pixels",
+          "detalhe": "What you see. To work from the screen alone, the model would have to read the image and guess where each control is. The example page's screenshot is about 15 thousand bytes of PNG."
+        },
+        {
+          "icone": "camadas",
+          "titulo": "Tree",
+          "sub": "role + name",
+          "forte": true,
+          "detalhe": "The browser builds the accessibility tree from the HTML: each control becomes a role (textbox, combobox, button) with a name. Screen readers use it, and a snapshot of it is what Playwright MCP hands to the model. On the example page, that's 182 bytes of text."
+        },
+        {
+          "icone": "cerebro",
+          "titulo": "Model",
+          "sub": "chooses",
+          "detalhe": "The model reads the tree and decides: \"fill in the Seu nome field, pick Serviço, click Agendar\". If a control has no name, it has no safe way to choose it."
+        },
+        {
+          "icone": "seta",
+          "titulo": "Action",
+          "sub": "by reference",
+          "detalhe": "The tool performs the action on the chosen control, using the reference from the tree (in agent-browser, for example, refs like @e2). Then it reads the tree again to see the result."
+        }
+      ],
+      "volta": "After the action, a new tree",
+      "legenda": "Anything that isn't in the tree with a role and a name, the agent can only find by guessing from the screen."
+    },
+    {
+      "tipo": "passos",
+      "titulo": "How to read a tree",
+      "sub": "Three questions for each line.",
+      "passos": [
+        {
+          "titulo": "What's the role?",
+          "sub": "what it is",
+          "texto": [
+            "textbox is a text field, combobox is a list of options, button is a button, link is a link, heading is a title, img is an image. The role comes from the HTML element: <code>input</code>, <code>select</code>, <code>button</code>, <code>a</code>, <code>h1</code>, <code>img</code>.",
+            "A <code>div</code> with <code>onclick</code> doesn't become a button: it shows up as loose text."
+          ]
+        },
+        {
+          "titulo": "Does it have a name?",
+          "sub": "in quotes",
+          "texto": [
+            "The name appears in quotes: <code>textbox \"Seu nome\"</code>. It comes from the <code>label</code>, from <code>aria-label</code>, from the image's <code>alt</code>, or from the button's text.",
+            "No quotes means the control has no name: <code>- textbox</code>, <code>- img</code>."
+          ],
+          "exemplo": {
+            "rot": "A catch on the example page",
+            "texto": "In antes.html the first field shows up as textbox \"Seu nome\", but the name comes only from the placeholder. It disappears when the person types, and it isn't a label: the test in lesson 1 got stuck on exactly this field."
+          }
+        },
+        {
+          "titulo": "Is it in a region?",
+          "sub": "main, h1",
+          "texto": [
+            "<code>main</code> and a level-1 <code>heading</code> tell you where the main content is. Without them, the tree is a flat list and the agent can't tell what's the menu and what's the task."
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "The tree for antes.html, next to the screen",
+      "sub": "arvore.mjs opens the page in a headless Chromium, prints the tree with Playwright 1.63.0's locator.ariaSnapshot() (the same snapshot format Playwright MCP uses), saves the screenshot, and checks what's missing.",
+      "blocos": [
+        {
+          "rot": "Terminal · tree and screen",
+          "icone": "lupa",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode arvore.mjs antes --tela ${TMPDIR:-/tmp}/tela-antes.png; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>## árvore de acessibilidade · 9 linhas · 182 bytes\n- text: Agendar revisão\n- img\n- textbox \"Seu nome\"\n- combobox:\n  - option \"Escolha\" [selected]\n  - option \"Revisão básica\"\n  - option \"Revisão completa\"\n- textbox\n- text: Agendar\n## tela · /tmp/tela-antes.png · 14536 bytes (o modelo teria de ler pixels)\n## conferência · http://127.0.0.1:PORTA/antes.html\n  - img sem nome acessível\n  - combobox sem nome acessível\n  - textbox sem nome acessível\n  - &lt;html&gt; sem lang\n  - sem &lt;main&gt;\n  - sem &lt;h1&gt;\n  - &lt;div&gt; clicável que não é botão (\"Agendar\")\n  - campo #nome sem &lt;label&gt; (só placeholder)\n  - campo #servico sem &lt;label&gt;\n  - campo #data sem &lt;label&gt;\nproblemas: 10\nsaída: 1</pre><p>Nine lines of tree versus 14,536 bytes of PNG. In the tree, the service list (combobox), the date field, and the image have no name, and the \"Agendar\" button became <code>text</code>. The check lists 10 problems and the script exits with 1.</p>"
+          },
+          {
+            "rot": "Common mistake: \"it has a name, so it's fine\"",
+            "html": "<p>The line <code>textbox \"Seu nome\"</code> looks good. But the check flags <code>campo #nome sem &lt;label&gt; (só placeholder)</code>: Chromium uses the placeholder as a last resort for the name. The lesson 1 test looks the field up by its label (<code>getByLabel</code>) and got stuck right there. A real label is <code>&lt;label for&gt;</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Practice",
+      "sub": "The tree of the example page and the tree of your site.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Tree × screen",
+          "min": "10 min",
+          "texto": "Run the \"tree and screen\" block. Open /tmp/tela-antes.png and, for each line of the tree, find the control in the image. Mark the ones that have no name.",
+          "pronto": "<code>node arvore.mjs antes --tela /tmp/tela-antes.png</code> → <code>problemas: 10</code> and <code>saída: 1</code>, and the file <code>/tmp/tela-antes.png</code> exists."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · The tree of your site",
+          "min": "10 min",
+          "texto": "Run arvore.mjs on the same page of your site that you used in lesson 1. Write down the number of problems: it comes back in lesson 3 and in the plan.",
+          "pronto": "<code>node arvore.mjs https://[your-site]/[page]</code> ends with <code>problemas: N</code> and <code>saída: 0</code> (N = 0) or <code>saída: 1</code>, with N noted down."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Lesson quiz",
+      "perguntas": [
+        {
+          "p": "What does Playwright MCP hand to the model so it can decide where to click?",
+          "opcoes": [
+            "A PNG screenshot at every step of the task",
+            "The entire source code of the page, with the CSS and JavaScript",
+            "A snapshot of the accessibility tree",
+            "The list of WebMCP tools registered by the page"
+          ],
+          "certa": 2,
+          "explica": "Playwright MCP uses accessibility snapshots instead of screenshots. WebMCP tools are a different approach (calling), and they only exist with an origin trial.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "The tree shows \"- textbox\" with nothing after it. What does that tell you?",
+          "opcoes": [
+            "That the text field has no accessible name",
+            "That the field is disabled",
+            "That the field is required",
+            "That the field was filled in by the agent and is locked"
+          ],
+          "certa": 0,
+          "explica": "The name appears in quotes. Without quotes, the agent has no way to know whether that field is the date, the phone, or the email.",
+          "ref": "passos"
+        },
+        {
+          "p": "Does a button made with a div and onclick show up in the tree as a button?",
+          "opcoes": [
+            "As button, the same as a button made with button",
+            "As link, because the div is clickable",
+            "As combobox with the Agendar option",
+            "As loose text, with no button role"
+          ],
+          "certa": 3,
+          "explica": "The role comes from the HTML element. A div with onclick is text to the tree; for the agent, there is no button to click by name.",
+          "ref": "codigo",
+          "cert": true
+        },
+        {
+          "p": "The field has only the placeholder \"Seu nome\" and the tree shows textbox \"Seu nome\". Is it solved?",
+          "opcoes": [
+            "Yes: if it shows up with a name in the tree, the agent always finds it",
+            "No: the name comes from the placeholder; the label is missing",
+            "Yes, as long as the page has main and h1",
+            "No: a placeholder stops the agent from submitting the form"
+          ],
+          "certa": 1,
+          "explica": "Chromium uses the placeholder as a last resort. It disappears when you type, and anyone who looks for the label (like the lesson 1 test) won't find it.",
+          "ref": "codigo"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "In three sentences",
+      "itens": [
+        {
+          "t": "Tree, not pixels",
+          "texto": "The browser agent reads roles and names, a short list of text."
+        },
+        {
+          "t": "No quotes, no name",
+          "texto": "A control with no name is a control the agent has to guess."
+        },
+        {
+          "t": "Placeholders mislead",
+          "texto": "It gives a name in the tree, but it is not a label; use label."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Going further",
+      "links": [
+        {
+          "t": "Course kit: arvore.mjs",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/blob/main/kit/arvore.mjs",
+          "icone": "arquivo"
+        },
+        {
+          "t": "Playwright: ARIA snapshots (documentation)",
+          "href": "https://playwright.dev/docs/aria-snapshots",
+          "icone": "lupa"
+        },
+        {
+          "t": "Playwright MCP (Microsoft)",
+          "href": "https://github.com/microsoft/playwright-mcp",
+          "icone": "lupa"
+        },
+        {
+          "t": "Course 3 of the program: browser agents against your site",
+          "href": "https://inematds.github.io/formacao-webmcp-navegador-v72/en/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

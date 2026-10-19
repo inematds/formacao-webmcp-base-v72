@@ -1,0 +1,261 @@
+{
+  "slug": "html-semantico",
+  "num": 3,
+  "menu": "HTML",
+  "titulo": "Semantic HTML and a well-labeled form: the interface every agent already reads",
+  "titulo_curto": "HTML that the agent reads",
+  "minutos": 20,
+  "lead": "Before any tool for agents, there is an interface they all already read: HTML. A label tied to its field, a real button, a main region, a heading, a language, and alt text. It is stable, it works for screen readers and for agents, and it does not depend on an experimental browser. In this lesson you fix the sample page until the check comes back at zero.",
+  "objetivo": "fix the labels, button, regions, and alt text until arvore.mjs finds no problems in your copy of the page.",
+  "competencias": [
+    "rotular-formulario",
+    "usar-elementos-nativos",
+    "zerar-a-conferencia"
+  ],
+  "aprende": [
+    {
+      "icone": "caneta",
+      "t": "Six fixes the agent feels right away"
+    },
+    {
+      "icone": "check",
+      "t": "Native element before ARIA"
+    },
+    {
+      "icone": "terminal",
+      "t": "Check with arvore.mjs until zero"
+    },
+    {
+      "icone": "alvo",
+      "t": "Bring the same fix to your own site"
+    }
+  ],
+  "hero_alt": "A bike shop tool wall, each tool in its own outline with a blank label, and a monitor in the corner.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "Six fixes, from the old page to the new one",
+      "sub": "Click each one. All of them show up in the arvore.mjs check.",
+      "estilo": "escada",
+      "nos": [
+        {
+          "icone": "caneta",
+          "titulo": "Label",
+          "sub": "label for",
+          "detalhe": "Each field gets a <label for=\"id\">. The name becomes the label text, which doesn't disappear when the person types. Placeholder stays as a hint, never as the name."
+        },
+        {
+          "icone": "check",
+          "titulo": "Button",
+          "sub": "button",
+          "detalhe": "An action is a <button type=\"submit\"> inside a <form>. It works with the keyboard, shows up as button in the tree, and submits the form without extra JavaScript."
+        },
+        {
+          "icone": "camadas",
+          "titulo": "Regions",
+          "sub": "main, h1",
+          "detalhe": "<main> marks the main content and an <h1> says what the page is about. The agent separates the task from the menu and the footer."
+        },
+        {
+          "icone": "chat",
+          "titulo": "Language",
+          "sub": "lang",
+          "detalhe": "<html lang=\"pt-BR\"> says what language the text is in. Screen readers pronounce it correctly; reading tools know what they are reading."
+        },
+        {
+          "icone": "sol",
+          "titulo": "Image",
+          "sub": "alt",
+          "detalhe": "Every <img> with content gets alt text that describes what it shows. A decorative image gets alt=\"\" and disappears from the tree."
+        },
+        {
+          "icone": "megafone",
+          "titulo": "Result",
+          "sub": "role=status",
+          "forte": true,
+          "detalhe": "The form's response goes in an <output role=\"status\">. The agent (and the screen reader) finds the result by its role, without searching for text on the screen."
+        }
+      ],
+      "legenda": "Native element first: button, label, main. ARIA only where HTML doesn't have the right element."
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "The fixed form",
+      "sub": "The snippet that changed from antes.html to depois.html. The form works on its own, for people and for any agent that operates the screen.",
+      "blocos": [
+        {
+          "rot": "Snippet · kit/site/depois.html",
+          "icone": "arquivo",
+          "conteudo": "<html lang=\"pt-BR\">\n…\n<main>\n  <h1>Agendar revisão</h1>\n  <img src=\"bike.svg\" width=\"60\" height=\"40\" alt=\"Bicicleta na bancada da oficina\">\n  <form id=\"agendar\" aria-describedby=\"ajuda\">\n    <p id=\"ajuda\">Escolha o serviço e o dia. A oficina confirma por e-mail.</p>\n    <label for=\"nome\">Seu nome</label>\n    <input id=\"nome\" name=\"nome\" autocomplete=\"name\" required>\n    <label for=\"servico\">Serviço</label>\n    <select id=\"servico\" name=\"servico\" required>\n      <option value=\"\">Escolha</option>\n      <option value=\"basica\">Revisão básica</option>\n      <option value=\"completa\">Revisão completa</option>\n    </select>\n    <label for=\"data\">Data</label>\n    <input id=\"data\" name=\"data\" type=\"date\" required>\n    <button type=\"submit\">Agendar</button>\n    <output id=\"resultado\" role=\"status\" aria-live=\"polite\"></output>\n  </form>\n</main>"
+        },
+        {
+          "rot": "Terminal · check depois.html",
+          "icone": "play",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode arvore.mjs depois; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>## árvore de acessibilidade · 15 linhas · 415 bytes\n- main:\n  - heading \"Agendar revisão\" [level=1]\n  - img \"Bicicleta na bancada da oficina\"\n  - paragraph: Escolha o serviço e o dia. A oficina confirma por e-mail.\n  - text: Seu nome\n  - textbox \"Seu nome\"\n  - text: Serviço\n  - combobox \"Serviço\":\n    - option \"Escolha\" [selected]\n    - option \"Revisão básica\"\n    - option \"Revisão completa\"\n  - text: Data\n  - textbox \"Data\"\n  - button \"Agendar\"\n  - status\n## conferência · http://127.0.0.1:PORTA/depois.html\nproblemas: 0\nsaída: 0</pre><p>Now everything has a role and a name: <code>heading</code>, <code>img</code> with a description, the three fields, the <code>button \"Agendar\"</code>, and the <code>status</code> for the response. The tree grew from 182 to 415 bytes, and the check comes back at zero.</p>"
+          },
+          {
+            "rot": "Common mistake: fixing it with ARIA on a div",
+            "html": "<p>Putting <code>role=\"button\"</code> and <code>aria-label</code> on the clickable <code>div</code> makes the tree show a button, but it doesn't get keyboard focus or fire on Enter without more JavaScript, and it doesn't submit the form. <code>arvore.mjs</code> keeps flagging <code>&lt;div&gt; clicável que não é botão</code>, on purpose: swap it for the <code>button</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Your copy to fix",
+      "sub": "Copy antes.html to a folder of your own and run the check: 10 problems. Then edit the copy until it hits zero. arvore.mjs accepts the path to any .html.",
+      "blocos": [
+        {
+          "rot": "Terminal · copy and check",
+          "icone": "terminal",
+          "conteudo": "O=${TMPDIR:-/tmp}/oficina\nmkdir -p $O && cp ~/projetos/formacao-webmcp-base-v72/kit/site/antes.html $O/\ncd ~/projetos/formacao-webmcp-base-v72/kit\nnode arvore.mjs $O/antes.html | tail -3; echo \"saída: ${PIPESTATUS[0]}\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>  - campo #servico sem &lt;label&gt;\n  - campo #data sem &lt;label&gt;\nproblemas: 10\nsaída: 1</pre><p>The last three lines of the copy check, before the fix. The full list is in lesson 2.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Practice",
+      "sub": "Reset the copy and bring the fix to your own site.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Reset the copy",
+          "min": "20 min",
+          "texto": "Edit /tmp/oficina/antes.html with the six fixes, without looking at depois.html. Run arvore.mjs after each change and watch the list shrink.",
+          "pronto": "<code>node arvore.mjs /tmp/oficina/antes.html</code> → <code>problemas: 0</code> and <code>saída: 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · The form still works",
+          "min": "5 min",
+          "texto": "Run tres-jeitos.mjs on your fixed copy: the agent has to find the three fields and the button by name and read the result.",
+          "pronto": "<code>node tres-jeitos.mjs /tmp/oficina/antes.html</code> → line <code>2 · operar</code> with <code>controles na árvore · 0 sem nome</code> and <code>saída: 0</code>."
+        },
+        {
+          "id": "e3",
+          "titulo": "E3 · One fix on your own site",
+          "min": "30 min",
+          "texto": "On the page of your site from lesson 2, apply the fixes (start with the labels and the button) on a local copy or in a test environment. Publish when the check drops.",
+          "pronto": "<code>node arvore.mjs</code> on the page (copy or published) shows <code>problemas:</code> lower than the number you noted in lesson 2."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Lesson quiz",
+      "perguntas": [
+        {
+          "p": "What is the right way to give a form text field a name?",
+          "opcoes": [
+            "A label element tied to the field with for",
+            "A placeholder with the field name inside it",
+            "A title attribute on the input with the name",
+            "Bold text right above the field"
+          ],
+          "certa": 0,
+          "explica": "The label tied with for becomes the accessible name and stays visible. A placeholder disappears when you type, and loose text above the field isn't tied to it.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "Why swap the clickable div for a button, instead of putting role=\"button\" on the div?",
+          "opcoes": [
+            "Because role=\"button\" is forbidden by the WebMCP spec",
+            "Because the div makes the page much slower on a phone",
+            "Because the agent only reads elements that have their own id",
+            "Because button already comes with focus, keyboard, and submit"
+          ],
+          "certa": 3,
+          "explica": "Native element first: button gets focus, fires with Enter, and submits the form. The role only changes what the tree shows; you'd have to program the rest.",
+          "ref": "codigo"
+        },
+        {
+          "p": "The form's response appears in some random div. What changes when you use <output role=\"status\">?",
+          "opcoes": [
+            "Nothing for the agent; it only changes the text color on screen",
+            "The agent finds the result by the status role",
+            "The form becomes a registered WebMCP tool",
+            "The result goes to the site's MCP server"
+          ],
+          "certa": 1,
+          "explica": "status is an accessibility tree role: the agent reads there what happened after the click. It has nothing to do with WebMCP; it's stable HTML.",
+          "ref": "diagrama"
+        },
+        {
+          "p": "Does this HTML fix depend on an origin trial or a flag in Chrome?",
+          "opcoes": [
+            "Yes, it only works with the published origin trial token",
+            "Yes, it needs the enable-webmcp-testing flag turned on",
+            "No: it's stable HTML, read by agents",
+            "Only in Edge 150, which has the origin trial open"
+          ],
+          "certa": 2,
+          "explica": "Label, button, regions, and alt are plain old HTML. That's the stable base; WebMCP is the experimental part.",
+          "ref": "diagrama",
+          "cert": true
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "In three sentences",
+      "itens": [
+        {
+          "t": "Six fixes",
+          "texto": "label, button, main and h1, lang, alt, and status."
+        },
+        {
+          "t": "Native first",
+          "texto": "The right element before ARIA; ARIA doesn't submit a form."
+        },
+        {
+          "t": "Check until zero",
+          "texto": "arvore.mjs tells you what's missing, on your copy and on your site."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Going further",
+      "links": [
+        {
+          "t": "MDN: the label element",
+          "href": "https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/label",
+          "icone": "lupa"
+        },
+        {
+          "t": "MDN: the status ARIA role",
+          "href": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role",
+          "icone": "lupa"
+        },
+        {
+          "t": "Course kit: antes.html and depois.html",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit/site",
+          "icone": "arquivo"
+        },
+        {
+          "t": "inemaSEO Program: the shallow page and what the bot reads",
+          "href": "https://inematds.github.io/formacao-inemaseo-fundacao-v72/en/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

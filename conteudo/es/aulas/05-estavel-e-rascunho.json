@@ -1,0 +1,272 @@
+{
+  "slug": "estavel-e-rascunho",
+  "num": 5,
+  "menu": "Estable",
+  "titulo": "Estable × borrador: leer la spec, el Chrome Status y las posiciones de los navegadores con fecha",
+  "titulo_curto": "Estable × borrador",
+  "minutos": 15,
+  "lead": "WebMCP ya cambió de nombre una vez y puede cambiar de nuevo antes del fin del origin trial. Quien enseña o implementa necesita saber, con fecha, qué está escrito en la spec, en qué navegador funciona y quién está en contra. En esta clase lees eso directamente en las fuentes primarias con un script, y aprendes a separar lo que es base de lo que es laboratorio.",
+  "objetivo": "leer en la fuente, con fecha, en qué punto está WebMCP: spec, origin trial y posición de cada navegador.",
+  "competencias": [
+    "ler-fonte-primaria",
+    "datar-o-que-e-experimental",
+    "separar-estavel-de-rascunho"
+  ],
+  "aprende": [
+    {
+      "icone": "arquivo",
+      "t": "El encabezado de la spec: estado y fecha"
+    },
+    {
+      "icone": "grafico",
+      "t": "Chrome Status e implementation-status: dónde funciona"
+    },
+    {
+      "icone": "chat",
+      "t": "Mozilla neutral, WebKit en contra: las posiciones públicas"
+    },
+    {
+      "icone": "calendario",
+      "t": "La anotación con fecha que va a tu plan"
+    }
+  ],
+  "hero_alt": "Hoja de proyecto en papel vegetal con dibujo técnico a lápiz y borrones sobre una mesa oscura, monitor desenfocado al fondo.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "Qué es base y qué es laboratorio el 19/10/2026",
+      "sub": "Haz clic en cada nivel.",
+      "estilo": "escada",
+      "nos": [
+        {
+          "icone": "check",
+          "titulo": "Estable",
+          "sub": "base",
+          "forte": true,
+          "detalhe": "HTML semántico y accesible, formulario con etiquetas, MCP en el servidor (revisión 2026-07-28), buen diseño de tools. Puede ser base de ejercicio, evaluación y producción."
+        },
+        {
+          "icone": "arquivo",
+          "titulo": "Spec",
+          "sub": "borrador CG",
+          "detalhe": "WebMCP: Draft Community Group Report del 16/10/2026, del Web Machine Learning Community Group. El propio documento dice: \"not a W3C Standard nor is it on the W3C Standards Track\"."
+        },
+        {
+          "icone": "relogio",
+          "titulo": "Chrome",
+          "sub": "origin trial",
+          "detalhe": "Chrome Status: \"Proposed\", dev trial desde la 146, origin trial de la 149 a la 156, sin fecha de lanzamiento estable. Para desarrollar en local, el flag enable-webmcp-testing. Edge: origin trial en la 150."
+        },
+        {
+          "icone": "x",
+          "titulo": "Otros",
+          "sub": "posiciones",
+          "detalhe": "Mozilla: posición neutral (03/08/2026). WebKit (Safari): en contra, con objeciones de diseño de API, privacidad, seguridad y portabilidad. No prometas que va a funcionar en todos los navegadores."
+        }
+      ],
+      "legenda": "Ejercicio y evaluación sobre la base estable. WebMCP como laboratorio, con fecha y detección de funcionalidad."
+    },
+    {
+      "tipo": "passos",
+      "titulo": "Dónde mirar y qué buscar",
+      "sub": "Cuatro fuentes, una pregunta cada una.",
+      "passos": [
+        {
+          "titulo": "Spec",
+          "sub": "qué dice",
+          "texto": [
+            "En la parte superior de webmachinelearning.github.io/webmcp: el tipo de documento y la fecha. Si la fecha cambió desde tu última lectura, vuelve a leer lo que usas.",
+            "Busca el nombre de la superficie. Al 16/10/2026 es <code>document.modelContext</code>; <code>navigator.modelContext</code> ya no aparece."
+          ]
+        },
+        {
+          "titulo": "Implementación",
+          "sub": "dónde funciona",
+          "texto": [
+            "El implementation-status.md del repositorio de la spec dice dónde hay origin trial (Chrome 149, Edge 150) y qué más existe (Brave Leo experimental, ChatGPT Desktop).",
+            "El Chrome Status (entrada 5117755740913664) da el rango del trial y la etapa."
+          ]
+        },
+        {
+          "titulo": "Posiciones",
+          "sub": "quién apoya",
+          "texto": [
+            "Mozilla y WebKit publican posiciones en issues abiertos: mozilla/standards-positions #1412 y WebKit/standards-positions #670. La etiqueta \"position:\" indica la posición."
+          ]
+        },
+        {
+          "titulo": "Anota con fecha",
+          "sub": "tu plan",
+          "texto": [
+            "Todo lo que depende de un flag, un origin trial o un explainer lleva el sello \"experimental al DD/MM/AAAA\". WebMCP es preparación, no ranking: la visibilidad en las IAs es tema de la Formación inemaSEO."
+          ],
+          "exemplo": {
+            "rot": "Un caso real de una API que cambió",
+            "texto": "El cambio de navigator.modelContext a document.modelContext fue aceptado el 19/05/2026 (PR #177). Los cursos escritos antes de esa fecha enseñan la API vieja."
+          }
+        }
+      ]
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "El estado de WebMCP, leído en las fuentes",
+      "sub": "El estado.sh descarga la spec y el implementation-status.md y lee las dos issues de posición mediante la API pública de GitHub, sin login ni clave. Solo necesitas curl.",
+      "blocos": [
+        {
+          "rot": "Terminal · leer el estado",
+          "icone": "lupa",
+          "conteudo": "bash ~/projetos/formacao-webmcp-base-v72/kit/estado.sh; echo \"saída: $?\""
+        },
+        {
+          "rot": "Modelo · anotación con fecha para el plan",
+          "icone": "copiar",
+          "conteudo": "WebMCP en <dd/mm/aaaa>\n- spec: Draft Community Group Report de <fecha> (superficie: <document.modelContext>)\n- Chrome: <origin trial / flag>; Edge: <origin trial>\n- Firefox: <posición>; Safari: <posición>\n- decisión para mi sitio: <esperar | laboratorio | registrar con detección de funcionalidad y fallback>"
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Salida capturada (19/10/2026)",
+            "html": "<pre>spec WebMCP · versão de 2026-10-16 · not a W3C Standard\n  document.modelContext: 16 menções · navigator.modelContext: 0\nChrome · An Origin Trial is live in Chrome 149\nEdge · An Origin Trial is live in Edge 150\nFirefox · mozilla/standards-positions #1412 · position: neutral\nSafari · WebKit/standards-positions #670 · position: oppose\nlido em 19/10/2026\nsaída: 0</pre><p>Spec del 16/10/2026 con 16 menciones a <code>document.modelContext</code> en el texto y ninguna a <code>navigator.modelContext</code>. Origin trial en Chrome 149 y en Edge 150; Mozilla neutral, WebKit en contra.</p>"
+          },
+          {
+            "rot": "Error común: copiar la fecha de un post",
+            "html": "<p>Los posts y cursos antiguos citan el borrador del 17/09/2026 y todavía muestran <code>navigator.modelContext</code>. La fecha que vale es la del encabezado de la spec el día en que lees. Si el estado.sh muestra una fecha distinta del 16/10/2026, la spec cambió después de este curso: vuelve a leerla antes de usar cualquier ejemplo de aquí.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Práctica",
+      "sub": "Lee el estado de hoy y anótalo con fecha.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · El estado de hoy",
+          "min": "5 min",
+          "texto": "Ejecuta el bloque \"leer el estado\". Compara cada línea con la salida capturada el 19/10/2026 y anota qué cambió.",
+          "pronto": "<code>bash estado.sh</code> imprime una línea <code>spec WebMCP · versão de</code> con fecha, las líneas <code>Chrome ·</code>, <code>Edge ·</code>, <code>Firefox ·</code> y <code>Safari ·</code>, y termina en <code>saída: 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · La anotación con fecha",
+          "min": "10 min",
+          "texto": "Completa el modelo \"anotación con fecha\" con la salida de hoy y elige la decisión para tu sitio. Va a la sección WebMCP del plan (clase 8).",
+          "pronto": "la anotación tiene una fecha dd/mm/aaaa, la fecha de la spec, la posición de Firefox y de Safari y una decisión escrita, sin ningún <code>&lt;…&gt;</code> sobrante."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Prueba de la lección",
+      "perguntas": [
+        {
+          "p": "¿Cuál es el estado del documento de WebMCP al 16/10/2026?",
+          "opcoes": [
+            "Recomendación del W3C, ya es estándar de la web",
+            "Borrador de Community Group, fuera de la vía de estándar",
+            "Estándar de Chrome, implementado en todos los navegadores",
+            "Especificación aprobada del IETF, ya en RFC"
+          ],
+          "certa": 1,
+          "explica": "El propio documento dice \"not a W3C Standard nor is it on the W3C Standards Track\". Enseñarlo como estándar es un error.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "¿Cuál es la posición de WebKit (Safari) sobre WebMCP?",
+          "opcoes": [
+            "A favor, con implementación prevista",
+            "Neutral",
+            "Sin posición registrada",
+            "En contra (position: oppose)"
+          ],
+          "certa": 3,
+          "explica": "La issue #670 de WebKit tiene la etiqueta position: oppose. La neutral es la de Mozilla.",
+          "ref": "codigo",
+          "cert": true
+        },
+        {
+          "p": "En Chrome, ¿cómo queda disponible WebMCP para los visitantes de tu sitio hoy?",
+          "opcoes": [
+            "Con token de origin trial del sitio (Chrome 149–156)",
+            "En todo Chrome estable, sin que el sitio haga nada",
+            "Solo instalando una extensión oficial de Google en Chrome",
+            "Solo en Chrome para Android, con la flag activada"
+          ],
+          "certa": 0,
+          "explica": "Origin trial del 149 al 156, con token por origen. La flag enable-webmcp-testing sirve para desarrollar en tu máquina, no para los visitantes.",
+          "ref": "diagrama"
+        },
+        {
+          "p": "El estado.sh muestra una fecha de spec distinta del 16/10/2026. ¿Qué hacer?",
+          "opcoes": [
+            "Nada: las fechas de la spec no cambian la API publicada",
+            "Apagar WebMCP en el sitio hasta que salga el estándar",
+            "Volver a leer la spec antes de usar los ejemplos",
+            "Cambiar document por navigator en el código"
+          ],
+          "certa": 2,
+          "explica": "La API ya cambió de nombre una vez. Una fecha nueva pide una relectura; volver a navigator sería volver a la versión vieja.",
+          "ref": "codigo"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "En tres frases",
+      "itens": [
+        {
+          "t": "Base estable",
+          "texto": "HTML, MCP en el servidor y diseño de herramientas."
+        },
+        {
+          "t": "Laboratorio con fecha",
+          "texto": "WebMCP: borrador del 16/10/2026, origin trial, WebKit en contra."
+        },
+        {
+          "t": "Lee en la fuente",
+          "texto": "Spec, implementation-status y posiciones, con la fecha de hoy."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Para ir más allá",
+      "links": [
+        {
+          "t": "WebMCP: Draft Community Group Report",
+          "href": "https://webmachinelearning.github.io/webmcp/",
+          "icone": "arquivo"
+        },
+        {
+          "t": "Chrome Status: WebMCP",
+          "href": "https://chromestatus.com/feature/5117755740913664",
+          "icone": "grafico"
+        },
+        {
+          "t": "implementation-status.md (repositorio de la spec)",
+          "href": "https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md",
+          "icone": "lista"
+        },
+        {
+          "t": "Mozilla standards-positions #1412",
+          "href": "https://github.com/mozilla/standards-positions/issues/1412",
+          "icone": "chat"
+        },
+        {
+          "t": "WebKit standards-positions #670",
+          "href": "https://github.com/WebKit/standards-positions/issues/670",
+          "icone": "chat"
+        },
+        {
+          "t": "Formación inemaSEO: WebMCP como preparación, para el dueño del sitio",
+          "href": "https://inematds.github.io/formacao-inemaseo-ias-v72/es/aulas/webmcp-preparacao/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

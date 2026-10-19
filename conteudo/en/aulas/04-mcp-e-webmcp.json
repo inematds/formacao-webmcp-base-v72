@@ -1,0 +1,262 @@
+{
+  "slug": "mcp-e-webmcp",
+  "num": 4,
+  "menu": "MCP and WebMCP",
+  "titulo": "MCP and WebMCP in one picture: server × page, who calls whom",
+  "titulo_curto": "MCP and WebMCP",
+  "minutos": 15,
+  "lead": "The two names look like the same thing, but they are not. MCP connects an agent to a server of yours, outside the browser, and it is stable. WebMCP lets the page itself declare tools for the agent running in the browser, and it is a draft. In this lesson you separate the two in one picture and run the feature detection that keeps the site working without the API.",
+  "objetivo": "place MCP (server) and WebMCP (page) in one picture and see feature detection with fallback running.",
+  "competencias": [
+    "separar-mcp-e-webmcp",
+    "detectar-recurso",
+    "manter-o-fallback"
+  ],
+  "aprende": [
+    {
+      "icone": "nuvem",
+      "t": "MCP: the agent calls your server (revision 2026-07-28)"
+    },
+    {
+      "icone": "camadas",
+      "t": "WebMCP: the page declares tools in the browser"
+    },
+    {
+      "icone": "escudo",
+      "t": "Feature detection: without the API, nothing breaks"
+    },
+    {
+      "icone": "seta",
+      "t": "Which course in the program teaches each side"
+    }
+  ],
+  "hero_alt": "Industrial humanoid robot sitting in front of a monitor with a browser, with cables running to a server rack in the background.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "Two paths to the same action",
+      "sub": "Click each block.",
+      "nos": [
+        {
+          "icone": "robo",
+          "titulo": "Agent",
+          "sub": "client",
+          "detalhe": "Claude Code, Codex, an agent in the browser. In MCP it is the client that calls the server. In WebMCP it is in the browser and calls what the open page registered."
+        },
+        {
+          "icone": "nuvem",
+          "titulo": "MCP server",
+          "sub": "outside the browser",
+          "detalhe": "A program of yours that exposes tools, resources, and prompts over stdio or Streamable HTTP. Current revision 2026-07-28: no session and no initialize, server/discover required. Stable. Course 1 of the program."
+        },
+        {
+          "icone": "camadas",
+          "titulo": "WebMCP page",
+          "sub": "in the browser",
+          "detalhe": "The page registers JavaScript functions in document.modelContext (registerTool, getTools, executeTool, toolchange event). Community Group draft from 10/16/2026, only with an origin trial or a flag. By default the tool is only visible to the page itself, to the same origin, and to agents built into the browser. Course 2."
+        },
+        {
+          "icone": "escudo",
+          "titulo": "Fallback",
+          "sub": "the HTML",
+          "forte": true,
+          "detalhe": "Without the API, the same site keeps working through the form from lesson 3. The page checks whether document.modelContext exists and only then registers tools. No visitor loses anything."
+        }
+      ],
+      "legenda": "MCP: the agent goes to your server. WebMCP: the open page offers tools to the browser's agent. The HTML holds up both."
+    },
+    {
+      "tipo": "passos",
+      "titulo": "Side by side",
+      "sub": "What changes between the two, in four questions.",
+      "passos": [
+        {
+          "titulo": "Where does it run?",
+          "texto": [
+            "MCP: in a process of yours (on the agent's machine over stdio, or at an HTTP address). WebMCP: inside the open tab, in the page's JavaScript."
+          ]
+        },
+        {
+          "titulo": "Who calls?",
+          "texto": [
+            "MCP: the client (the agent) calls the server. WebMCP: the browser's agent reads the list with <code>getTools</code> and runs the tool; the function that runs is the page's."
+          ]
+        },
+        {
+          "titulo": "Is it ready?",
+          "texto": [
+            "MCP: stable, revision 2026-07-28 (tutorials with SSE and initialize are from old revisions). WebMCP: a draft that has already been renamed once (from <code>navigator</code> to <code>document</code>, accepted on 05/19/2026). Lesson 5."
+          ],
+          "exemplo": {
+            "rot": "Seal",
+            "texto": "WebMCP: experimental as of 10/19/2026 (origin trial Chrome 149–156, Edge 150)."
+          }
+        },
+        {
+          "titulo": "What should you prepare today?",
+          "texto": [
+            "HTML that the agent reads (lesson 3) works for both. If you have a service with an API, the MCP server is the stable step. The page with WebMCP comes in as a lab, always with detection and fallback."
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Feature detection with fallback",
+      "sub": "The only WebMCP JavaScript in this course: check whether the API exists and, without it, leave the form as it is. Registering real tools is course 2. The detectar.mjs opens the page without the API and with an empty stub (it is not the API or the polyfill), just to show the two branches.",
+      "blocos": [
+        {
+          "rot": "File · kit/site/deteccao.js",
+          "icone": "arquivo",
+          "conteudo": "// deteccao.js — WebMCP feature detection with fallback (course 0 kit, WebMCP Program).\n// Spec used: WebMCP, Community Group Draft Report from 2026-10-16 (document.modelContext).\n// It is a Community Group draft, not a standard: in Chrome only with an origin trial (149–156) or a local flag.\n// Without the API, nothing changes: the form above is still the path for people and agents.\n(function () {\n  const caminho = \"modelContext\" in document\n    ? \"WebMCP presente: aqui a página registraria as ferramentas (curso 2 da formação)\"\n    : \"WebMCP ausente: o site segue pelo formulário, igual para todos\";\n  document.documentElement.dataset.webmcp = \"modelContext\" in document ? \"sim\" : \"nao\";\n  console.log(caminho);\n})();"
+        },
+        {
+          "rot": "Terminal · the two branches",
+          "icone": "play",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode detectar.mjs depois; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>sem API  · WebMCP ausente: o site segue pelo formulário, igual para todos · botão Agendar: sim\ncom stub · WebMCP presente: aqui a página registraria as ferramentas (curso 2 da formação) · botão Agendar: sim\nsaída: 0</pre><p>In both branches the \"Agendar\" button is still there: the fallback doesn't depend on the API. With the API present, the page would register the tools; without it, the page works the same for everyone.</p>"
+          },
+          {
+            "rot": "Common mistake: a page with no detection",
+            "html": "<pre>sem API  · (a página não faz detecção) · botão Agendar: não\ncom stub · (a página não faz detecção) · botão Agendar: não\nsaída: 1</pre><p>Running the same test on antes.html: the page does no detection at all and has no named button. WebMCP code without <code>\"modelContext\" in document</code> breaks in a browser that doesn't have the API, which today is almost every browser.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Practice",
+      "sub": "Both branches and detection in your copy.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Both branches",
+          "min": "5 min",
+          "texto": "Run the \"os dois ramos\" block and read deteccao.js line by line.",
+          "pronto": "<code>node detectar.mjs depois</code> → line <code>sem API  · WebMCP ausente</code>, line <code>com stub · WebMCP presente</code>, both with <code>botão Agendar: sim</code>, and <code>saída: 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · Detection in your copy",
+          "min": "10 min",
+          "texto": "Copy kit/site/deteccao.js to /tmp/oficina/ and add <code>&lt;script src=\"deteccao.js\"&gt;&lt;/script&gt;</code> at the end of the body of the copy you fixed in lesson 3.",
+          "pronto": "<code>node detectar.mjs /tmp/oficina/antes.html</code> → both lines with <code>botão Agendar: sim</code> and <code>saída: 0</code>."
+        },
+        {
+          "id": "e3",
+          "titulo": "E3 · Your service map",
+          "min": "10 min",
+          "texto": "Write three lines: which action on your site an agent would ask for; whether it lives in a service with an API (a candidate for MCP, course 1) or only on the page (a candidate for WebMCP, course 2); and which form is the fallback.",
+          "pronto": "the file with the three lines exists and each action has a named fallback form."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Lesson quiz",
+      "perguntas": [
+        {
+          "p": "Where does the tool run in an MCP server?",
+          "opcoes": [
+            "In the JavaScript of the page open in the browser",
+            "Inside the AI model the agent uses",
+            "In the visitor's browser, with an origin trial",
+            "In a process of your own, over stdio or HTTP"
+          ],
+          "certa": 3,
+          "explica": "MCP connects the agent (client) to a server of your own, outside the browser. A tool in the page's JavaScript is WebMCP.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "What is the WebMCP surface in the October 16, 2026 draft?",
+          "opcoes": [
+            "document.modelContext",
+            "navigator.modelContext",
+            "window.mcp",
+            "navigator.agent"
+          ],
+          "certa": 0,
+          "explica": "The change from navigator to document was accepted on May 19, 2026 (PR #177). Older material with navigator.modelContext is out of date.",
+          "ref": "passos",
+          "cert": true
+        },
+        {
+          "p": "What is the \"modelContext\" in document detection for?",
+          "opcoes": [
+            "To turn on the API in Chrome even without an origin trial",
+            "To tell the visitor to install the agent extension",
+            "To register only where the API exists",
+            "To hide the form when there is an agent"
+          ],
+          "certa": 2,
+          "explica": "Without the API, the code doesn't run the WebMCP branch and the form stays the way in. Nothing is hidden; the fallback is the site itself.",
+          "ref": "codigo"
+        },
+        {
+          "p": "Is the detectar.mjs stub the WebMCP polyfill?",
+          "opcoes": [
+            "Yes, it's the official implementation for those without the API",
+            "No: it's an empty object so you can see the other branch",
+            "Yes, it's the same object the origin trial installs",
+            "No: it's a local MCP server the kit starts"
+          ],
+          "certa": 1,
+          "explica": "The stub doesn't register or run anything. The (unofficial) polyfill and the real API are for course 2.",
+          "ref": "codigo"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "In three sentences",
+      "itens": [
+        {
+          "t": "MCP is a server",
+          "texto": "The agent calls a process of your own; stable, revision 2026-07-28."
+        },
+        {
+          "t": "WebMCP is a page",
+          "texto": "document.modelContext, October 16, 2026 draft, only with an origin trial or a flag."
+        },
+        {
+          "t": "Detect and fall back to HTML",
+          "texto": "Without the API, the form is still the way in."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Going further",
+      "links": [
+        {
+          "t": "MCP: versioning (current revision 2026-07-28)",
+          "href": "https://modelcontextprotocol.io/specification/versioning",
+          "icone": "lupa"
+        },
+        {
+          "t": "WebMCP: spec repository and README",
+          "href": "https://github.com/webmachinelearning/webmcp",
+          "icone": "lupa"
+        },
+        {
+          "t": "Course 1 of the program: an MCP server for your service",
+          "href": "https://inematds.github.io/formacao-webmcp-mcp-v72/en/",
+          "icone": "seta"
+        },
+        {
+          "t": "Course 2 of the program: WebMCP on your site",
+          "href": "https://inematds.github.io/formacao-webmcp-site-v72/en/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}

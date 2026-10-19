@@ -1,0 +1,227 @@
+{
+  "id": "formacao-webmcp-base-v72",
+  "lang": "en",
+  "url": "https://inematds.github.io/formacao-webmcp-base-v72/en/",
+  "nome": "Foundations: how agents use a website today",
+  "sub": "WebMCP Program · course 0",
+  "volta": {
+    "t": "WebMCP Area",
+    "href": "https://eventos.inema.pro/webmcp/"
+  },
+  "lado_card": {
+    "rot": "WebMCP Program",
+    "t": "Course 0 of 6",
+    "texto": "This course's kit: the example page and the scripts that show your site the way an agent sees it. All local, no model calls, tested on 10/19/2026.",
+    "link": "Open the kit/ folder on GitHub",
+    "href": "https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit"
+  },
+  "rodape": "INEMA.CLUB · open and free content · INEMA Learning v7.2 format · WebMCP Program, course 0 of 6 · <a href=\"https://eventos.inema.pro/webmcp/\">eventos.inema.pro/webmcp</a> · <a href=\"https://github.com/inematds/formacao-webmcp-base-v72/tree/main/kit\">course kit on GitHub</a> · <a href=\"https://inema.club/\">inema.club</a>",
+  "videos": {
+    "webmcp-short": {
+      "titulo": "WebMCP in 30 seconds",
+      "duracao": "29 s",
+      "formato": "9:16",
+      "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp.mp4",
+      "vtt": "assets/vtt/webmcp-short.vtt",
+      "poster": "assets/img/webmcp-short.jpg",
+      "pagina": "https://eventos.inema.pro/webmcp/",
+      "idiomas": {
+        "en": {
+          "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp-en.mp4",
+          "vtt": "assets/vtt/webmcp-short-en.vtt",
+          "duracao": "30 s",
+          "pagina": "https://eventos.inema.pro/webmcp/en/"
+        },
+        "es": {
+          "mp4": "https://github.com/inematds/eventos-shorts/releases/download/v1.0.0/webmcp-es.mp4",
+          "vtt": "assets/vtt/webmcp-short-es.vtt",
+          "duracao": "28 s",
+          "pagina": "https://eventos.inema.pro/webmcp/es/"
+        }
+      }
+    }
+  },
+  "inicio": {
+    "kicker": "WebMCP Program · course 0 of 6 · 8 lessons",
+    "titulo": "Foundations: how agents use a website today, and what your site shows them",
+    "lead": "Reading, operating the screen, and calling a tool: the three ways an agent can use your site. You see the accessibility tree it receives, fix your HTML, place MCP and WebMCP, read the draft's status with its date, and leave with a diagnosis of your site. All local, no quota spent.",
+    "cta": "Start with lesson 1",
+    "cta2": {
+      "t": "See the WebMCP Area",
+      "href": "https://eventos.inema.pro/webmcp/"
+    },
+    "capa_alt": "Dark monitor with a browser open on a form and a cable plugged into a connector beside it.",
+    "numeros": [
+      {
+        "v": "8",
+        "t": "lessons"
+      },
+      {
+        "v": "21",
+        "t": "exercises with expected output"
+      },
+      {
+        "v": "7",
+        "t": "scripts in the kit, all local"
+      },
+      {
+        "v": "0",
+        "t": "model calls"
+      }
+    ],
+    "aulas_titulo": "The lessons",
+    "aulas_sub": "From what the agent does today to your site's plan: three ways, the tree, the HTML, MCP and WebMCP, stable vs. draft, who shows up, the diagnosis, and the plan.",
+    "blocos": [
+      {
+        "t": "Who it's for",
+        "itens": [
+          "Web devs, makers, or technical site owners who edit HTML and JavaScript and run commands in the terminal.",
+          "People who want AI agents to use their site, in the browser and through MCP, and have never worked on this.",
+          "People who have heard of WebMCP and want to know what is stable and what is still a draft."
+        ]
+      },
+      {
+        "t": "What you'll be able to do",
+        "itens": [
+          "Run the three ways an agent can use a site against your page and see which one works.",
+          "Read the accessibility tree the agent receives and bring the HTML problems down to zero.",
+          "Say, with a date and a source, where WebMCP and the browsers' positions stand.",
+          "Run WebMCP Readiness on your machine and build your site's plan for agents."
+        ]
+      },
+      {
+        "t": "Where this course fits in the WebMCP Program",
+        "itens": [
+          "This is course 0: the foundation for the other five. Suggested order: 0 → 1 → 2 → 3 → 4 → 5.",
+          "After it: 1 · MCP server for your service, 2 · WebMCP on the page, 3 · browser agents, 4 · security, 5 · expert.",
+          "Before you start: Node 20 or newer, git, and Python 3. Linux or macOS; on Windows, use WSL."
+        ]
+      }
+    ]
+  },
+  "ui": {
+    "pular": "Skip to content",
+    "aulas": "Lessons",
+    "concluido": "completed",
+    "aula": "Lesson",
+    "nesta_aula": "In this lesson, you will learn:",
+    "objetivo": "Goal:",
+    "proxima_aula": "Next lesson",
+    "aula_anterior": "Previous lesson",
+    "voltar_inicio": "Back to course home",
+    "marcar_concluida": "Mark lesson as done",
+    "dg_dica": "Click each block in the diagram to see what it does.",
+    "copiar": "Copy",
+    "copiado": "Copied",
+    "selo_simulacao": "Simulation: illustrative example",
+    "selo_real": "Example from the repository",
+    "pronto_quando": "Done when:",
+    "fiz": "I did this exercise",
+    "video_pagina": "Video page with script",
+    "pergunta": "Question",
+    "de": "of",
+    "cert_tag": "skill",
+    "correto": "Correct",
+    "errado": "Not this one",
+    "quiz_aguarda": "Pick an answer. The explanation shows up after you try.",
+    "proxima_pergunta": "Next question",
+    "quiz_ver": "See result",
+    "quiz_fim": "Quiz complete",
+    "quiz_total": "You got {a} of {n} right. Get them all right and the lesson is marked as done.",
+    "aparencia": "Appearance",
+    "tamanho_texto": "Text size",
+    "tema": "Theme",
+    "tema_escuro": "Dark",
+    "tema_papel": "Light paper",
+    "role_dica": "Scroll the page: each step below lights up its part of the diagram.",
+    "pre_requisito": "requires",
+    "ver_aula": "View the lesson",
+    "mapa_dica": "Click an exercise to see what to do and the \"done when\".",
+    "etapas": "Steps",
+    "exercicios": "exercises",
+    "rever": "Review:",
+    "revisar_erradas": "Review the wrong ones",
+    "refazer": "Retake the quiz",
+    "h_semana": "h per week",
+    "data_inicio": "Start date",
+    "ritmo": "Time available",
+    "gerar_plano": "Generate my plan",
+    "baixar_md": "Download plano.md",
+    "baixar_ics": "Download to calendar (.ics)",
+    "ind_estudo": "Study (lessons)",
+    "ind_pratica": "Self-reported practice",
+    "ind_nota": "Practice = exercises you marked as done. Proof comes in the certification exam.",
+    "estudo": {
+      "titulo": "Your study",
+      "continuar": "Pick up where I left off",
+      "comecar": "Start with lesson 1",
+      "cta_continuar": "Continue lesson {n}",
+      "hoje": "today",
+      "ontem": "yesterday",
+      "ha_dias": "{n} days ago",
+      "desempenho": "Quiz performance",
+      "notas": "My notes",
+      "dados": "Copy my data",
+      "sem_testes": "No quizzes taken yet. The quiz is at the end of each lesson.",
+      "nao_fez": "quiz not taken yet",
+      "ultimo": "Latest",
+      "melhor": "Best",
+      "tentativas": "attempts",
+      "tentativa": "attempt",
+      "tudo_certo": "You got everything right on the last quiz.",
+      "rever": "To review",
+      "resposta": "Correct answer:",
+      "ir_teste": "Retake the quiz",
+      "sem_notas": "No notes yet. In a lesson, select a passage of text and tap Highlight or Note.",
+      "so_marcado": "(highlight only)",
+      "marcar": "Highlight",
+      "anotar": "Note",
+      "salvar": "Save",
+      "apagar": "Remove highlight",
+      "fechar": "Close",
+      "nota_ph": "Write your note about this passage…",
+      "um_bloco": "Highlight within a single paragraph only.",
+      "nao_marca": "This passage can't be highlighted.",
+      "dados_exp": "Your progress, your notes, and your quiz scores stay only in this browser. Download a copy (.json) to keep or to continue on another computer or browser; there, load the copy. Loading adds to what already exists and doesn't erase anything.",
+      "exportar": "Download copy",
+      "importar": "Load copy",
+      "import_ok": "Copy loaded ({n} items). Refreshing the page…",
+      "import_erro": "File not recognized. Nothing was changed.",
+      "import_outro": "This copy is from a different course. Nothing was changed.",
+      "export_ok": "Copy downloaded."
+    },
+    "conv_dica": "Pick your answer. The comment appears right after, and the conversation continues based on your choice.",
+    "conv_voce": "You",
+    "conv_escolha": "Your answer",
+    "conv_boa": "Good choice",
+    "conv_meio": "Could be better",
+    "conv_ruim": "Weak choice",
+    "conv_fim": "End of the conversation",
+    "conv_placar": "You scored {p} of {m} possible points.",
+    "conv_licao": "Lesson:",
+    "conv_recomecar": "Restart the conversation",
+    "conv_feita": "Your best score: {p} of {m} points.",
+    "comecar": "Start the lesson",
+    "nesta_vai": "In this lesson you will",
+    "trocar_tema": "Switch light/dark theme",
+    "conf_vazio": "Paste the text or upload the file before checking.",
+    "conf_falta": "Not yet. What's missing:",
+    "conf_campo": "The {c}: line is missing its description (at least {x} letters).",
+    "conf_planos": "I found {n} numbered shots; the request is for {x} to {y}. Start each shot with its number (1 | ...).",
+    "conf_no_plano": "Shot {i}: missing {g}.",
+    "conf_um_so": "Shot {i}: {n} choices of {g}; pick just one.",
+    "conf_variedade": "Only {n} different type(s) of {g} across the shots; vary it to at least {x}.",
+    "conf_sem_duracao": "Shot {i}: missing the duration in seconds (e.g., 4 s).",
+    "conf_duracao": "The shots add up to {s} s; the request is for {x} to {y} s.",
+    "conf_termo": "You still need to mention {g}.",
+    "conf_mais": "… and {n} more.",
+    "conf_rot": "Paste your file here (or upload the .txt):",
+    "conf_conferir": "Check",
+    "conf_exemplo": "Example that passes",
+    "conf_errado": "Example with errors",
+    "conf_carregar": "Upload .txt",
+    "conf_baixar": "Download the file",
+    "conf_limpar": "Clear"
+  },
+  "icone": "camadas"
+}

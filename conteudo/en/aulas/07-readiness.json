@@ -1,0 +1,269 @@
+{
+  "slug": "readiness",
+  "num": 7,
+  "menu": "Readiness",
+  "titulo": "The WebMCP Readiness diagnosis: run it and read it without falling for \"high score = ranking\"",
+  "titulo_curto": "The Readiness diagnosis",
+  "minutos": 20,
+  "lead": "WebMCP Readiness is INEMA's open scanner: it opens the page in an isolated browser, only reads, and returns a score in four categories. In this lesson you run the scanner on your machine, with a pinned version, against the example page and against your own site, and you learn to read the result as a diagnosis, not as a promise of ranking.",
+  "objetivo": "run WebMCP Readiness on your machine and read the diagnosis without confusing score with ranking.",
+  "competencias": [
+    "rodar-o-scanner-local",
+    "ler-categorias-e-falhas",
+    "separar-diagnostico-de-ranking"
+  ],
+  "aprende": [
+    {
+      "icone": "baixar",
+      "t": "The open scanner, cloned with a pinned version"
+    },
+    {
+      "icone": "grafico",
+      "t": "Four categories and the overall score"
+    },
+    {
+      "icone": "x",
+      "t": "Expected failures and failures to fix right away"
+    },
+    {
+      "icone": "alvo",
+      "t": "What the score doesn't tell you"
+    }
+  ],
+  "hero_alt": "Dark workbench with an abstract diagnostic-panel monitor and a multimeter's probe tips touching a connector.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "From the page to the fix plan",
+      "sub": "Click each block.",
+      "nos": [
+        {
+          "icone": "sol",
+          "titulo": "Page",
+          "sub": "one URL",
+          "detalhe": "The scan goes deep only on the URL you give it. The sitemap is inventoried, but the other pages are not opened in this mode."
+        },
+        {
+          "icone": "lupa",
+          "titulo": "Scanner",
+          "sub": "passive",
+          "detalhe": "Opens the page in a headless Chromium, reads HTML, headers, robots.txt, sitemap.xml and llms.txt, and lists the WebMCP tools with getTools() when the API exists. It doesn't run any of the site's tools."
+        },
+        {
+          "icone": "grafico",
+          "titulo": "Categories",
+          "sub": "4 scores",
+          "detalhe": "WebMCP, SEO, GEO and AEO, each from 0 to 100. In the code of version 2.2.2, the overall score weighs 30% WebMCP, 30% SEO, 20% GEO and 20% AEO. How to read the weights in depth is the agent-ready lesson of the inemaSEO Program."
+        },
+        {
+          "icone": "lista",
+          "titulo": "Plan",
+          "sub": "by priority",
+          "forte": true,
+          "detalhe": "The failures and warnings with a recommendation, sorted by priority. This is what goes into the lesson 8 plan, not the score."
+        }
+      ],
+      "legenda": "In the scanner's own words: SEO, GEO and AEO measure observable signals; they do not guarantee indexing, ranking or citation by AI systems."
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "Install the scanner with a pinned version",
+      "sub": "Clone the public inematds/webmcp-readiness repository into a practice folder, pin commit 3f3d1c8 (version 2.2.2, from 09/24/2026), install the dependencies, and run its tests.",
+      "blocos": [
+        {
+          "rot": "Terminal · clone and test",
+          "icone": "baixar",
+          "conteudo": "E=${TMPDIR:-/tmp}/ensaio-formacao-webmcp-base-v72\nmkdir -p $E && cd $E\n[ -d webmcp-readiness ] || git clone -q https://github.com/inematds/webmcp-readiness\ncd webmcp-readiness && git checkout -q 3f3d1c8 && npm ci --no-audit --no-fund --silent\nnpm test 2>&1 | grep -E '^ℹ (tests|pass|fail) '"
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>ℹ tests 33\nℹ pass 33\nℹ fail 0</pre><p>The scanner's own 33 tests pass. If the number is different, you are not on the pinned commit.</p>"
+          },
+          {
+            "rot": "Common mistake: skipping npm ci",
+            "html": "<pre>node:internal/modules/package_json_reader:316\n  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);\n        ^\n\nError [ERR_MODULE_NOT_FOUND]: Cannot find package '@sparticuz/chromium' imported from /tmp/ensaio-formacao-webmcp-base-v72/webmcp-readiness/lib/readiness.mjs\n    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)\nsaída: 1</pre><p>Without the scanner's dependencies installed, Node can't find <code>@sparticuz/chromium</code> and stops at the import. Run the whole block: <code>npm ci</code> is part of it.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "The scanner against the example page",
+      "sub": "readiness-local.mjs imports the scanner, points it to the kit's Chromium, and, only for the page at 127.0.0.1, allows the local address (the scanner blocks private networks by default).",
+      "blocos": [
+        {
+          "rot": "Terminal · before and after",
+          "icone": "play",
+          "conteudo": "E=${TMPDIR:-/tmp}/ensaio-formacao-webmcp-base-v72\ncd ~/projetos/formacao-webmcp-base-v72/kit\nfor p in antes depois; do node readiness-local.mjs $E/webmcp-readiness $p; echo \"saída: $?\"; done"
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>Readiness 2.2.2 · kit/site/antes.html · nota 48 (Precisa de ajustes)\n  WebMCP 43 · SEO 53 · GEO 49 · AEO 49\n  falhas: 5 · avisos: 20 · ok: 5 · ferramentas WebMCP: 0 · document.modelContext no Chromium do scan: não\n  [falha] webmcp · Ferramentas descobertas\n  [falha] webmcp · Nomes e descrições\n  [falha] webmcp · Parâmetros estruturados\n  [falha] seo · Descrição nos resultados\n  [falha] seo · URL canônica\n  lembrete do próprio scanner: SEO, GEO e AEO medem sinais observáveis; não garantem indexação, ranking ou citação por sistemas de IA.\nsaída: 0\nReadiness 2.2.2 · kit/site/depois.html · nota 52 (Precisa de ajustes)\n  WebMCP 43 · SEO 59 · GEO 56 · AEO 49\n  falhas: 5 · avisos: 18 · ok: 7 · ferramentas WebMCP: 0 · document.modelContext no Chromium do scan: não\n  [falha] webmcp · Ferramentas descobertas\n  [falha] webmcp · Nomes e descrições\n  [falha] webmcp · Parâmetros estruturados\n  [falha] seo · Descrição nos resultados\n  [falha] seo · URL canônica\n  lembrete do próprio scanner: SEO, GEO e AEO medem sinais observáveis; não garantem indexação, ranking ou citação por sistemas de IA.\nsaída: 0</pre><p>Clearing the 10 problems in the tree raised the score from only 48 to 52. Readiness measures other things (description, canonical, WebMCP tools); you check the tree with arvore.mjs. The three WebMCP failures are expected: the page doesn't register tools, and that is course 2.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "The scanner on a real site",
+      "sub": "The same command against inema.club, which belongs to INEMA and registers WebMCP tools with an origin trial token. --json saves the full report.",
+      "blocos": [
+        {
+          "rot": "Terminal · a public site",
+          "icone": "play",
+          "conteudo": "E=${TMPDIR:-/tmp}/ensaio-formacao-webmcp-base-v72\ncd ~/projetos/formacao-webmcp-base-v72/kit\nnode readiness-local.mjs $E/webmcp-readiness https://inema.club/ --json ${TMPDIR:-/tmp}/readiness-inema.json; echo \"saída: $?\""
+        },
+        {
+          "rot": "Template · your site",
+          "icone": "copiar",
+          "conteudo": "E=${TMPDIR:-/tmp}/ensaio-formacao-webmcp-base-v72\ncd ~/projetos/formacao-webmcp-base-v72/kit\nnode readiness-local.mjs $E/webmcp-readiness https://<your-site>/ --json ~/readiness-<your-site>.json; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Captured output (10/19/2026)",
+            "html": "<pre>Readiness 2.2.2 · https://www.inema.club/ · nota 92 (Estrutura forte)\n  WebMCP 95 · SEO 100 · GEO 88 · AEO 77\n  falhas: 0 · avisos: 4 · ok: 26 · ferramentas WebMCP: 8 · document.modelContext no Chromium do scan: sim\n  lembrete do próprio scanner: SEO, GEO e AEO medem sinais observáveis; não garantem indexação, ranking ou citação por sistemas de IA.\nsaída: 0</pre><p>Score 92 with 8 tools discovered at runtime, because the kit's Chromium 153 is within the origin trial range. A high score means signals are present; it doesn't mean a search engine or an AI will cite the site.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Practice",
+      "sub": "Scanner installed, the example, and your site.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Scanner with a pinned version",
+          "min": "10 min",
+          "texto": "Run the \"clone and test\" block.",
+          "pronto": "the output shows <code>ℹ tests 33</code>, <code>ℹ pass 33</code> and <code>ℹ fail 0</code>."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · Before and after in the scanner",
+          "min": "5 min",
+          "texto": "Run the \"before and after\" block and compare the categories. Explain, in one sentence, why the score barely changed.",
+          "pronto": "both lines start with <code>Readiness 2.2.2</code>, the depois.html one shows <code>nota 52</code>, and your sentence mentions what Readiness measures that arvore.mjs does not."
+        },
+        {
+          "id": "e3",
+          "titulo": "E3 · Your site's diagnosis",
+          "min": "15 min",
+          "texto": "Run the template against your site's main page. Pick the three failures or warnings to handle first and say why. WebMCP tool failures with no registered tool are expected.",
+          "pronto": "the file <code>~/readiness-[your-site].json</code> exists, the output ends with <code>saída: 0</code>, and the plan has the score with a date and the three choices."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Lesson quiz",
+      "perguntas": [
+        {
+          "p": "Does Readiness run a site's WebMCP tools to test them?",
+          "opcoes": [
+            "Yes, it runs all the tools with test data",
+            "No: it is passive; it only lists them with getTools()",
+            "It only runs the ones marked readOnlyHint",
+            "It only runs them when the site has an MCP server"
+          ],
+          "certa": 1,
+          "explica": "The scanner only reads. Running a site's tool is an action with consequences, and it doesn't do that.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "Your site scored 92. What does that score guarantee?",
+          "opcoes": [
+            "That the site shows up in AI search answers",
+            "That Google moves the site up in the rankings next month",
+            "That WebMCP works in every visitor's browser",
+            "That the signals being looked for are on the page"
+          ],
+          "certa": 3,
+          "explica": "The report itself warns: SEO, GEO and AEO don't guarantee indexing, ranking or citation. The score is a diagnosis.",
+          "ref": "codigo",
+          "cert": true
+        },
+        {
+          "p": "depois.html cleared the tree check, but the score went up only 4 points. Why?",
+          "opcoes": [
+            "Because Readiness measures other things besides the tree",
+            "Because the scanner can't open local pages",
+            "Because the accessibility tree doesn't matter to agents",
+            "Because the kit's Chromium is too old for the scanner"
+          ],
+          "certa": 0,
+          "explica": "Different tools measure different things. The tree matters to whoever operates the screen; Readiness measures SEO, GEO, AEO, and WebMCP signals.",
+          "ref": "codigo"
+        },
+        {
+          "p": "Why pin commit 3f3d1c8 instead of using the newest version?",
+          "opcoes": [
+            "Because the new version of the scanner is paid",
+            "Because the new commit doesn't run on Linux or Mac",
+            "So the output matches the course's output",
+            "To avoid the Chrome origin trial during the scan"
+          ],
+          "certa": 2,
+          "explica": "A pinned version makes \"done when\" verifiable. After the course, update knowing that rules and scores may change.",
+          "ref": "codigo"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "In three sentences",
+      "itens": [
+        {
+          "t": "Passive and local",
+          "texto": "The scanner only reads; you run it on your own machine, with a pinned version."
+        },
+        {
+          "t": "Read the failures",
+          "texto": "The plan comes from the failures by priority, not from the score."
+        },
+        {
+          "t": "A score is not a ranking",
+          "texto": "Signals being present don't guarantee a citation or a position."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Going further",
+      "links": [
+        {
+          "t": "WebMCP Readiness (open source)",
+          "href": "https://github.com/inematds/webmcp-readiness",
+          "icone": "git"
+        },
+        {
+          "t": "WebMCP Readiness on the web (for public URLs)",
+          "href": "https://webmcp.inema.pro/",
+          "icone": "lupa"
+        },
+        {
+          "t": "inemaSEO Program: agent-ready and the score weights",
+          "href": "https://inematds.github.io/formacao-inemaseo-sistemas-v72/en/aulas/agente-ready/",
+          "icone": "seta"
+        },
+        {
+          "t": "Course kit: readiness-local.mjs",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/blob/main/kit/readiness-local.mjs",
+          "icone": "arquivo"
+        }
+      ]
+    }
+  ]
+}

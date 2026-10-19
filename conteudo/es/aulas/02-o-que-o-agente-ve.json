@@ -1,0 +1,250 @@
+{
+  "slug": "o-que-o-agente-ve",
+  "num": 2,
+  "menu": "Lo que ve",
+  "titulo": "Lo que el agente ve: árbol de accesibilidad × captura de pantalla",
+  "titulo_curto": "Lo que ve el agente",
+  "minutos": 15,
+  "lead": "Tú ves colores, un botón amarillo y un campo de fecha. Un agente de navegador como Playwright MCP recibe otra cosa: una lista de roles y nombres, el árbol de accesibilidad. En esta clase imprimes ese árbol de la página de ejemplo, lo comparas con la captura de pantalla y aprendes a leer lo que falta.",
+  "objetivo": "leer el árbol de accesibilidad que recibe el agente y compararlo con la captura de pantalla de la misma página.",
+  "competencias": [
+    "ler-a-arvore-de-acessibilidade",
+    "achar-controle-sem-nome",
+    "comparar-arvore-e-tela"
+  ],
+  "aprende": [
+    {
+      "icone": "camadas",
+      "t": "Rol y nombre: las dos cosas que busca el agente"
+    },
+    {
+      "icone": "lupa",
+      "t": "El árbol de la página impreso por el kit"
+    },
+    {
+      "icone": "x",
+      "t": "Los huecos: control sin nombre, div que finge ser botón"
+    },
+    {
+      "icone": "grafico",
+      "t": "Árbol en texto × pantalla en píxeles"
+    }
+  ],
+  "hero_alt": "Monitor oscuro con una página de formulario y, encima, contornos finos de cajas que muestran la estructura de la página.",
+  "secoes": [
+    {
+      "tipo": "diagrama",
+      "titulo": "De la página al clic",
+      "sub": "Haz clic en cada bloque.",
+      "nos": [
+        {
+          "icone": "sol",
+          "titulo": "Pantalla",
+          "sub": "píxeles",
+          "detalhe": "Lo que tú ves. Para usar solo la pantalla, el modelo tendría que leer la imagen y adivinar dónde está cada control. La captura de la página de ejemplo pesa cerca de 15 mil bytes de PNG."
+        },
+        {
+          "icone": "camadas",
+          "titulo": "Árbol",
+          "sub": "rol + nombre",
+          "forte": true,
+          "detalhe": "El navegador arma el árbol de accesibilidad a partir del HTML: cada control se vuelve un rol (textbox, combobox, button) con un nombre. Es el que usan los lectores de pantalla, y un snapshot de ese árbol es lo que Playwright MCP le entrega al modelo. En la página de ejemplo, 182 bytes de texto."
+        },
+        {
+          "icone": "cerebro",
+          "titulo": "Modelo",
+          "sub": "elige",
+          "detalhe": "El modelo lee el árbol y decide: \"rellenar el campo Seu nome, elegir Serviço, hacer clic en Agendar\". Si el control no tiene nombre, no tiene cómo elegir con seguridad."
+        },
+        {
+          "icone": "seta",
+          "titulo": "Acción",
+          "sub": "por referencia",
+          "detalhe": "La tool ejecuta la acción en el control elegido, mediante la referencia del árbol (en agent-browser, por ejemplo, refs como @e2). Después vuelve a leer el árbol para ver el resultado."
+        }
+      ],
+      "volta": "Después de la acción, un árbol nuevo",
+      "legenda": "Lo que no está en el árbol con rol y nombre, el agente solo lo encuentra adivinando por la pantalla."
+    },
+    {
+      "tipo": "passos",
+      "titulo": "Cómo leer un árbol",
+      "sub": "Tres preguntas para cada línea.",
+      "passos": [
+        {
+          "titulo": "¿Cuál es el rol?",
+          "sub": "qué es",
+          "texto": [
+            "textbox es un campo de texto, combobox es una lista de opciones, button es un botón, link es un enlace, heading es un título, img es una imagen. El rol viene del elemento HTML: <code>input</code>, <code>select</code>, <code>button</code>, <code>a</code>, <code>h1</code>, <code>img</code>.",
+            "Un <code>div</code> con <code>onclick</code> no se vuelve button: aparece como texto suelto."
+          ]
+        },
+        {
+          "titulo": "¿Tiene nombre?",
+          "sub": "entre comillas",
+          "texto": [
+            "El nombre aparece entre comillas: <code>textbox \"Seu nome\"</code>. Viene del <code>label</code>, de <code>aria-label</code>, del <code>alt</code> de la imagen o del texto del botón.",
+            "Sin comillas, el control no tiene nombre: <code>- textbox</code>, <code>- img</code>."
+          ],
+          "exemplo": {
+            "rot": "Trampa de la página de ejemplo",
+            "texto": "En antes.html el primer campo aparece como textbox \"Seu nome\", pero el nombre viene solo del placeholder. Desaparece cuando la persona escribe y no es un label: la prueba de la clase 1 se trabó justamente en ese campo."
+          }
+        },
+        {
+          "titulo": "¿Está en una región?",
+          "sub": "main, h1",
+          "texto": [
+            "<code>main</code> y un <code>heading</code> de nivel 1 dicen dónde está el contenido principal. Sin ellos, el árbol es una lista plana y el agente no sabe qué es menú y qué es la tarea."
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "codigo",
+      "titulo": "El árbol de antes.html, junto a la pantalla",
+      "sub": "arvore.mjs abre la página en un Chromium headless, imprime el árbol con locator.ariaSnapshot() de Playwright 1.63.0 (el mismo formato de snapshot que usa Playwright MCP), guarda la captura de pantalla y comprueba lo que falta.",
+      "blocos": [
+        {
+          "rot": "Terminal · árbol y pantalla",
+          "icone": "lupa",
+          "conteudo": "cd ~/projetos/formacao-webmcp-base-v72/kit\nnode arvore.mjs antes --tela ${TMPDIR:-/tmp}/tela-antes.png; echo \"saída: $?\""
+        }
+      ],
+      "saida": {
+        "selo": "real",
+        "abas": [
+          {
+            "rot": "Salida capturada (19/10/2026)",
+            "html": "<pre>## árbol de accesibilidad · 9 líneas · 182 bytes\n- text: Agendar revisão\n- img\n- textbox \"Seu nome\"\n- combobox:\n  - option \"Escolha\" [selected]\n  - option \"Revisão básica\"\n  - option \"Revisão completa\"\n- textbox\n- text: Agendar\n## tela · /tmp/tela-antes.png · 14536 bytes (o modelo teria de ler pixels)\n## conferência · http://127.0.0.1:PORTA/antes.html\n  - img sem nome acessível\n  - combobox sem nome acessível\n  - textbox sem nome acessível\n  - &lt;html&gt; sem lang\n  - sem &lt;main&gt;\n  - sem &lt;h1&gt;\n  - &lt;div&gt; clicável que não é botão (\"Agendar\")\n  - campo #nome sem &lt;label&gt; (só placeholder)\n  - campo #servico sem &lt;label&gt;\n  - campo #data sem &lt;label&gt;\nproblemas: 10\nsaída: 1</pre><p>Nueve líneas de árbol contra 14.536 bytes de PNG. En el árbol, la lista de servicios (combobox), el campo de fecha y la imagen no tienen nombre, y el botón \"Agendar\" quedó como <code>text</code>. La conferencia lista 10 problemas y el script sale con 1.</p>"
+          },
+          {
+            "rot": "Error común: \"tiene nombre, entonces está bien\"",
+            "html": "<p>La línea <code>textbox \"Seu nome\"</code> parece buena. Pero la conferencia acusa <code>campo #nome sem &lt;label&gt; (só placeholder)</code>: Chromium usa el placeholder como último recurso para el nombre. La prueba de la clase 1 busca por la etiqueta (<code>getByLabel</code>) y se trabó ahí. Una etiqueta de verdad es <code>&lt;label for&gt;</code>.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "tipo": "pratica",
+      "titulo": "Práctica",
+      "sub": "El árbol de la página de ejemplo y el de tu sitio.",
+      "exercicios": [
+        {
+          "id": "e1",
+          "titulo": "E1 · Árbol × pantalla",
+          "min": "10 min",
+          "texto": "Ejecuta el bloque \"árvore e tela\". Abre /tmp/tela-antes.png y, para cada línea del árbol, encuentra el control en la imagen. Marca los que no tienen nombre.",
+          "pronto": "<code>node arvore.mjs antes --tela /tmp/tela-antes.png</code> → <code>problemas: 10</code> y <code>saída: 1</code>, y el archivo <code>/tmp/tela-antes.png</code> existe."
+        },
+        {
+          "id": "e2",
+          "titulo": "E2 · El árbol de tu sitio",
+          "min": "10 min",
+          "texto": "Ejecuta arvore.mjs en la misma página de tu sitio que usaste en la clase 1. Anota el número de problemas: vuelve en la clase 3 y en el plan.",
+          "pronto": "<code>node arvore.mjs https://[tu-sitio]/[página]</code> termina con <code>problemas: N</code> y <code>saída: 0</code> (N = 0) o <code>saída: 1</code>, con N anotado."
+        }
+      ]
+    },
+    {
+      "tipo": "quiz",
+      "titulo": "Prueba de la lección",
+      "perguntas": [
+        {
+          "p": "¿Qué le entrega Playwright MCP al modelo para que decida dónde hacer clic?",
+          "opcoes": [
+            "Una captura de pantalla en PNG en cada paso de la tarea",
+            "Todo el código fuente de la página, con el CSS y el JavaScript",
+            "Un snapshot del árbol de accesibilidad",
+            "La lista de tools WebMCP registradas por la página"
+          ],
+          "certa": 2,
+          "explica": "Playwright MCP usa snapshots de accesibilidad en lugar de capturas de pantalla. Las tools WebMCP son otra forma (llamar), y solo existen con origin trial.",
+          "ref": "diagrama",
+          "cert": true
+        },
+        {
+          "p": "En el árbol aparece \"- textbox\" sin nada después. ¿Qué dice eso?",
+          "opcoes": [
+            "Que el campo de texto no tiene nombre accesible",
+            "Que el campo está deshabilitado",
+            "Que el campo es obligatorio",
+            "Que el campo fue completado por el agente y está bloqueado"
+          ],
+          "certa": 0,
+          "explica": "El nombre aparece entre comillas. Sin comillas, el agente no tiene cómo saber si ese campo es la fecha, el teléfono o el correo.",
+          "ref": "passos"
+        },
+        {
+          "p": "¿Un botón hecho con div y onclick aparece como botón en el árbol?",
+          "opcoes": [
+            "Como button, igual que un botón hecho con button",
+            "Como link, porque el div es clicable",
+            "Como combobox con la opción Agendar",
+            "Como texto suelto, sin rol de botón"
+          ],
+          "certa": 3,
+          "explica": "El rol viene del elemento HTML. Un div con onclick es texto para el árbol; para el agente, no hay un botón al que hacer clic por el nombre.",
+          "ref": "codigo",
+          "cert": true
+        },
+        {
+          "p": "El campo tiene solo placeholder \"Seu nome\" y el árbol muestra textbox \"Seu nome\". ¿Está resuelto?",
+          "opcoes": [
+            "Sí: si aparece con nombre en el árbol, el agente siempre lo encuentra",
+            "No: el nombre viene del placeholder; falta el label",
+            "Sí, siempre que la página tenga main y h1",
+            "No: el placeholder impide que el agente envíe el formulario"
+          ],
+          "certa": 1,
+          "explica": "Chromium usa el placeholder como último recurso. Desaparece al escribir, y quien busca por la etiqueta (como la prueba de la clase 1) no lo encuentra.",
+          "ref": "codigo"
+        }
+      ]
+    },
+    {
+      "tipo": "resumo",
+      "titulo": "En tres frases",
+      "itens": [
+        {
+          "t": "Árbol, no píxel",
+          "texto": "El agente de navegador lee roles y nombres, una lista corta de texto."
+        },
+        {
+          "t": "Sin comillas, sin nombre",
+          "texto": "Un control sin nombre es un control que el agente tiene que adivinar."
+        },
+        {
+          "t": "El placeholder engaña",
+          "texto": "Da un nombre en el árbol, pero no es una etiqueta; usa label."
+        }
+      ]
+    },
+    {
+      "tipo": "links",
+      "titulo": "Para ir más allá",
+      "links": [
+        {
+          "t": "Kit del curso: arvore.mjs",
+          "href": "https://github.com/inematds/formacao-webmcp-base-v72/blob/main/kit/arvore.mjs",
+          "icone": "arquivo"
+        },
+        {
+          "t": "Playwright: snapshots de ARIA (documentación)",
+          "href": "https://playwright.dev/docs/aria-snapshots",
+          "icone": "lupa"
+        },
+        {
+          "t": "Playwright MCP (Microsoft)",
+          "href": "https://github.com/microsoft/playwright-mcp",
+          "icone": "lupa"
+        },
+        {
+          "t": "Curso 3 de la formación: agentes de navegador contra tu sitio",
+          "href": "https://inematds.github.io/formacao-webmcp-navegador-v72/es/",
+          "icone": "seta"
+        }
+      ]
+    }
+  ]
+}
